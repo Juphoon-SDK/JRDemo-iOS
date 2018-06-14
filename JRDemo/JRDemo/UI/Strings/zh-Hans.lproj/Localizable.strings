@@ -1,0 +1,251 @@
+/* 
+  File.strings
+  JRDemo
+
+  Created by Ginger on 2018/2/8.
+  Copyright © 2018年 Ginger. All rights reserved.
+*/
+
+// 设置页
+"SETTING_ACCOUNT" = "账号";
+"SETTING_ADD_ACCOUNT" = "添加账号";
+"SETTING_LOGOUT" = "注销";
+"SETTING_VIBRATE_WHEN_ACCEPT" = "接听时震动";
+"SETTING_QUICK_DIAL" = "快速拨号";
+"SETTING_RINGTONE" = "铃声";
+"SETTING_RECORD" = "录音";
+"SETTING_ABOUT" = "关于";
+
+// Tab页
+"TAB_SETTING" = "设置";
+
+// 登陆
+"LOGIN" = "登录";
+"LOGINING" = "登录中";
+"LOGOUTING" = "登出中";
+"LOGINED" = "已登录";
+
+// 登陆错误信息
+"TIMEOUT" = "登录超时";
+"NETWORK_ERROE" = "网络错误";
+"SERVE_FORBIDDEN" = "服务不可用，账号或密码错误";
+"AUTH_FAILED" = "用户名密码错误";
+"NO_USER" = "账号不存在";
+"OTHER_ERROR" = "其他错误";
+
+// 账号信息
+"ACCOUNT_INFO_SECTION_COMMON" = "常规";
+"ACCOUNT_INFO_SECTION_ADVANCED" = "高级";
+
+"ACCOUNT_INFO_USERNAME" = "用户名";
+"ACCOUNT_INFO_PASSWORD" = "密码";
+"ACCOUNT_INFO_AUTHNAME" = "鉴权名";
+"ACCOUNT_INFO_SERVER" = "服务器";
+"ACCOUNT_INFO_SERVER_REALM" = "服务器域名";
+"ACCOUNT_INFO_PORT" = "端口";
+"ACCOUNT_INFO_TRANSPORT" = "协议";
+
+"SIP_SETTING" =  "SIP";
+"AUDIO_SETTING" = "音频";
+"VIDEO_SETTING" = "视频";
+"TRANSFER_SETTING" = "传输配置";
+"ACCOUNT_INFO_DELETE" = "删除";
+"DELETE_ACCOUNT" = "删除账号";
+
+// 高级设置
+
+// sip
+"SIP" = "Sip";
+"REG" = "注册"; // Register
+"REG_TYPE" = "注册类型";
+"REG_NO_DIGEST" = "注册无鉴权头";
+"REG_REFRESH_PERIOD" = "刷新注册间隔(s)";
+"REG_SUBSCRIBE" = "注册订阅";
+"REG_SUBSCRIBE_PERIOD" = "刷新订阅间隔(s)";
+"HEARTBEAT" = "心跳"; // Heartbeat
+"HEART_BEAT_TYPE" = "心跳类型";
+"HEART_BEAT_PERIOD_DATA" = "数据网心跳间隔(s)";
+"HEART_BEAT_PERIOD_WIFI" = "WiFi心跳间隔(s)";
+"ADVANCED_SETTINGS" = "高级配置"; // Advanced Settings
+"TIMER_TYPE" = "定时器类型";
+"TIMER_DATA" = "定时器时长(s)";
+"MINIMUM_TIMER" = "最小定时器时长(s)";
+"TEL_URI" = "使用teluri";
+
+// audio
+"AUIDO" = "音频";
+"AUDIO_CODEC" = "音频编解码"; // Audio Codec
+"AUDIO_BITRATE" = "码率(bps)";
+"AUDIO_PACKET_TIME" = "打包时长(ms)";
+"DTMF" = "DTMF"; // DTMF
+"DTMF_TYPE" = "DTMF类型";
+"DTMF_PAYLOAD" = "DTMF Payload(96-127)";
+"AGC" = "增益控制"; // AGC
+"AUDIO_SEND_AGC_TYPE" = "发送端增益模式";
+"AUDIO_SEND_AGC" = "发送端增益(0-30)";
+"AUDIO_RECV_AGC_TYPE" = "接收端增益模式";
+"AUDIO_RECV_AGC" = "接收端增益(0-30)";
+"ANR" = "噪音消除"; // ANR
+"AUDIO_SEND_ANR" = "发送端降噪等级";
+"AUDIO_RECV_ANR" = "接收端降噪等级";
+"JITTER_BUFFER" = "抗抖动"; //  Jitter Buffer
+"MINIMUM_DELAY" = "抗抖动缓存最小延迟";
+"MAXIMUM_PACKET_NUMBER" = "抗抖动缓存最大包数";
+"AUDIO_QOS_SETTINGS" = "音频QoS配置"; // Audio QoS Settings
+"DTX_TYPE" = "非连续传输模式";
+"AEC_TYPE" = "回音消除模式";
+"AUDIO_FEC" = "音频冗余";
+
+// video
+"VIDEO" = "视频";
+"VIDEO_CODEC" = "视频编解码"; // Video Codec
+"VIDEO_H264_PACKET_MODE" = "H264打包模式";
+"VIDEO_H264_PAYLOAD" = "H264 Payload值(118-127)";
+"VIDEO_BITRATE_SETTINGS" = "码率配置"; // Video Bitrate
+"VIDEO_BITRATE" = "码率(kbps)";
+"VIDEO_ARS" = "自适应码率控制";
+"VIDEO_RESOLUTION_SETTINGS" = "分辨率配置"; // Video Resolution
+"VIDEO_RESOLUTION" = "最大分辨率";
+"VIDEO_AUTO_RESOLUTION" = "自适应分辨率";
+"VIDEO_FRAMERATE_SETTINGS" = "帧率配置"; // Video Framerate
+"VIDEO_FRAMERATE" = "最大帧速率(fps)(1-30)";
+"VIDEO_AUTO_FRAMERATE" = "自适应帧速率";
+"VIDEO_QOS_SETTINGS" = "视频Qos配置"; // Video QoS Settings
+"VIDEO_KEY_FRAMERATE_PERIOD" = "关键帧间隔(ms)(0-600000)";
+"VIDEO_KEY_FRAMERATE_BY_INFO" = "关键帧请求方式";
+"VIDEO_RPSI" = "可靠引用帧";
+"VIDEO_FEC" = "视频冗余";
+"VIDEO_NACK" = "丢包重传";
+"VIDEO_RTX" = "重传，冗余格式支持";
+"VIDEO_BEM" = "带宽高效模式";
+"VIDEO_ORIENT" = "视频旋转";
+
+// network
+"NETWORK" = "传输配置";
+"MEDIA_TRANSFER_SETTINGS" = "媒体传输配置"; // Media Transfer Settings
+"SRTP_ENCRYPTION_TYPE" = "SRTP类型加密";
+"AUDIO_RTP_RTCP_PORT_REUSE" = "音频RTP/RTCP端口复用";
+"VIDEO_RTP_RTCP_PORT_REUSE" = "视频RTP/RTCP端口复用";
+"NAT_TRANVERSAL_SETTINGS" = "NAT穿越配置"; // NAT Traversal Settings
+"NAT_TRAVERSAL_TYPE" = "NAT穿越类型";
+"STUN_SERVER" = "STUN服务器地址";
+"STUN_PORT" = "STUN服务器端口";
+
+"SAVE" = "保存";
+"NO_CODEC_DESCRIPTION" = "你必须选择至少一种编解码!";
+"OUT_OF_RANGE" = "超出可用范围!";
+"INVALIDID_STRING" = "请输入正确的值!";
+
+// 通用
+"UNKNOWN" = "未知";
+"DELETE" = "删除";
+"AUDIO" = "音频";
+"VIDEO" = "视频";
+"MULTI_CALL" = "多方通话";
+"REGULAR" = "常规电话";
+"OK" = "确定";
+"CANCEL" = "取消";
+"FORBIDDEN" = "禁用";
+"ALREADY_FORBIDDEN" = "已禁用";
+"LOGIN_FIRST" = "请先登录";
+"ERROR" = "错误";
+
+"ADD_CONTACT" = "添加联系人";
+"DELETE_CONTACT" = "删除联系人";
+"CREATE_CONTACT" = "创建联系人";
+"ADD_TO_EXIST_CONTACT" = "添加到现有联系人";
+
+// 电话
+"UPDATE_VIDEO" = "转为视频通话";
+"TRANSFER_CALL" = "呼叫转移";
+"CALLING" = "呼叫中";
+"RINGING" = "振铃中";
+"CONNECTING" = "连接中";
+"PENDING" = "等待中";
+"END" = "结束";
+"DECLINED" = "挂断";
+"MISSED" = "未接";
+"HOLDING" = "挂起";
+"HELDING" = "被挂起";
+"FORWARDING" = "转移中";
+"INCOMING_CALL" = "来电";
+"ANSWER" = "接听";
+"ADD_CALL" = "添加通话";
+"HAVE_QUOTA" = "剩余%ld分钟";
+"QUOTA" = "配额";
+"REQUEST_VIDEO" = "对方请求视频通话";
+"CONNED" = "已连接";
+"MUTED" = "已静音";
+"NEW_CALL" = "新通话";
+"ADD_MEMBER" = "邀请成员？";
+"REMOVE_MEMBER" = "踢出成员？";
+"NO_QUOTA" = "未查询到此次通话的能力";
+"TO_AUDIO_FAILED" = "转音频通话失败，对方拒绝或不具备音频通话能力";
+"TO_VIDEO_FAILED" = "转视频通话失败，对方拒绝或不具备视频通话能力";
+
+// 默认铃声
+"MUSIC_BOX" = "八音盒";
+"WAKING_UP" = "苏醒";
+"BEATING_FINGERTIP" = "指尖跳动";
+"A_JOURNEY" = "旅途";
+"MORNING" = "清晨";
+"HAPPY_HOLIDAY" = "愉快的假日";
+"POTPOURRI" = "花香";
+"DREAM" = "寻梦";
+"SPRING_DING-DONG" = "泉水叮咚";
+"CHILDHOOD" = "童年";
+"RAIN_IN_MARCH" = "三月里的小雨";
+"MOONLIGHT_SHIMMER" = "月色微光";
+
+// 录音
+"DELETE_ALL_RECORDS" = "删除所有录音";
+"RECORD_TIME" = "录音时长";
+
+// 通话记录
+"DELETE_ALL_CALLS" = "删除所有记录";
+"MISS_CALL_COUNT" = "您有%d个未接来电";
+
+// 消息
+"MESSAGE" = "聊天";
+"DELETE_CONVERSATION" = "删除会话";
+"INPUT_SOMETHING" = "说点什么";
+"CANNOT_SEND_EMPTY_MESSAGE" = "不能发送空消息";
+"GET_CONVERSATIONS_FAILED" = "获取数据失败，请检查注册状态！";
+"SEND_MESSAGE_FAILED" = "发送消息失败，请检查注册状态！";
+"RECORD_TIPS" = "按住说话";
+"RECORD_COMPLETE" = "录音结束";
+"SEND_FILE" = "发送(%lu/%ld)";
+"ABOVE_THE_LIMIT" = "超出上限";
+"CAN_NOT_SELECT_MULTI_TYPE" = "不能选择不同类型的文件";
+"LOADING_ASSET" = "读取手机相册..";
+"LOADING_ASSET_FAILED" = "读取失败";
+"ALBUM" = "相册";
+"ORIGINAL_IMAGE" = "原图";
+"LOCATION" = "位置";
+"LOADING_LOCATION" = "加载位置中..";
+"SEND" = "发送";
+"MJ_LOAD_MORE" = "下拉加载";
+"MJ_LOADING" = "加载中..";
+"MJ_LOAD_COMPLETE" = "加载完成";
+"NEW_CONVERSATION" = "新建会话";
+"INPUT_PEER_NUMBER" = "对端号码";
+"MESSAGE_UNKNOW" = "[未知类型]";
+"MESSAGE_LOCATION" = "[地理位置]";
+"MESSAGE_AUDIO" = "[语音]";
+"MESSAGE_IMAGE" = "[图片]";
+"MESSAGE_VCARD" = "[名片]";
+"MESSAGE_VIDEO" = "[视频]";
+"MESSAGE_FILE" = "[文件]";
+"OTHER_FILES" = "其他类型文件";
+"NO_OTHER_FILES" = "无其他类型文件";
+"NO_CONVERSATION" = "当前无聊天记录，点击右上角开始聊天";
+"RESEND_MESSAGE" = "继续发送这条消息？";
+"NOT_SUPPORT" = "文件类型不支持查看";
+
+// 群
+"GROUP_LIST" = "群列表";
+"SUB_GROUP_LIST_FAILED" = "订阅群列表失败";
+"GET_GROUPS_FAILED" = "获取群列表失败，请检查注册状态！";
+"GROUP_NOT_EXIST" = "您已退出群聊";
+"NEW_GROUP" = "新建群聊";
+"INPUT_GROUP_NAME" = "输入群名称";

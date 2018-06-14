@@ -1,0 +1,251 @@
+/* 
+  File.strings
+  JRDemo
+
+  Created by Ginger on 2018/2/8.
+  Copyright © 2018年 Ginger. All rights reserved.
+*/
+
+// 设置页
+"SETTING_ACCOUNT" = "Account";
+"SETTING_ADD_ACCOUNT" = "Add Account";
+"SETTING_LOGOUT" = "Logout";
+"SETTING_VIBRATE_WHEN_ACCEPT" = "Vibrate when Accept";
+"SETTING_QUICK_DIAL" = "Quick Dial";
+"SETTING_RINGTONE" = "Ringtone";
+"SETTING_RECORD" = "Record";
+"SETTING_ABOUT" = "About";
+
+// Tab页
+"TAB_SETTING" = "Setting";
+
+// 登陆
+"LOGIN" = "Login";
+"LOGINING" = "Logining";
+"LOGOUTING" = "Logouting";
+"LOGINED" = "Logined";
+
+// 登陆错误信息
+"TIMEOUT" = "Timeout";
+"NETWORK_ERROE" = "Network Error";
+"SERVE_FORBIDDEN" = "Serve Forbidden";
+"AUTH_FAILED" = "Auth Failed";
+"NO_USER" = "No User";
+"OTHER_ERROR" = "Other Error";
+
+// 账号信息
+"ACCOUNT_INFO_SECTION_COMMON" = "COMMON";
+"ACCOUNT_INFO_SECTION_ADVANCED" = "ADVANCED";
+
+"ACCOUNT_INFO_USERNAME" = "Username";
+"ACCOUNT_INFO_PASSWORD" = "Password";
+"ACCOUNT_INFO_AUTHNAME" = "Authname";
+"ACCOUNT_INFO_SERVER" = "Server";
+"ACCOUNT_INFO_SERVER_REALM" = "Server Realm";
+"ACCOUNT_INFO_PORT" = "Port";
+"ACCOUNT_INFO_TRANSPORT" = "Transport";
+
+"SIP_SETTING" =  "SIP";
+"AUDIO_SETTING" = "Audio";
+"VIDEO_SETTING" = "Video";
+"TRANSFER_SETTING" = "Network";
+"ACCOUNT_INFO_DELETE" = "Delete";
+"DELETE_ACCOUNT" = "Delete Account";
+
+// 高级设置
+
+// sip
+"SIP" = "Sip";
+"REG" = "Register"; // Register
+"REG_TYPE" = "Reg Type";
+"REG_NO_DIGEST" = "Reg No Digest";
+"REG_REFRESH_PERIOD" = "Reg Refresh Period(s)";
+"REG_SUBSCRIBE" = "Reg Subscribe";
+"REG_SUBSCRIBE_PERIOD" = "Reg Subscribe Period(s)";
+"HEARTBEAT" = "Heartbeat"; // Heartbeat
+"HEART_BEAT_TYPE" = "Heartbeat Type";
+"HEART_BEAT_PERIOD_DATA" = "Heartbeat Period Data(s)";
+"HEART_BEAT_PERIOD_WIFI" = "Heartbeat Period WiFi(s)";
+"ADVANCED_SETTINGS" = "Advanced Settings"; // Advanced Settings
+"TIMER_TYPE" = "Timer Type";
+"TIMER_DATA" = "Timer Data(s)";
+"MINIMUM_TIMER" = "Minimum Timer(s)";
+"TEL_URI" = "Tel Uri";
+
+// audio
+"AUIDO" = "Audio";
+"AUDIO_CODEC" = "Auido Codec"; // Audio Codec
+"AUDIO_BITRATE" = "Audio Bitrate(bps)";
+"AUDIO_PACKET_TIME" = "Audio Packet Time(ms)";
+"DTMF" = "DTMF"; // DTMF
+"DTMF_TYPE" = "DTMF Type";
+"DTMF_PAYLOAD" = "DTMF Payload(96-127)";
+"AGC" = "AGC"; // AGC
+"AUDIO_SEND_AGC_TYPE" = "Audio Send AGC Type";
+"AUDIO_SEND_AGC" = "Audio Send AGC(0-30)";
+"AUDIO_RECV_AGC_TYPE" = "Audio Recv AGC Type";
+"AUDIO_RECV_AGC" = "Audio Recv AGC(0-30)";
+"ANR" = "ANR"; // ANR
+"AUDIO_SEND_ANR" = "Audio Send ANR";
+"AUDIO_RECV_ANR" = "Audio Recv ANR";
+"JITTER_BUFFER" = "Jitter Buffer"; //  Jitter Buffer
+"MINIMUM_DELAY" = "Minimum Delay";
+"MAXIMUM_PACKET_NUMBER" = "Maximum Packet Number";
+"AUDIO_QOS_SETTINGS" = "Audio QoS Settings"; // Audio QoS Settings
+"DTX_TYPE" = "DTX Type";
+"AEC_TYPE" = "AEC Type";
+"AUDIO_FEC" = "Audio FEC";
+
+// video
+"VIDEO" = "Video";
+"VIDEO_CODEC" = "Video Codec"; // Video Codec
+"VIDEO_H264_PACKET_MODE" = "H264 Packet Mode";
+"VIDEO_H264_PAYLOAD" = "H264 Payload(118-127)";
+"VIDEO_BITRATE_SETTINGS" = "Video Bitrate"; // Video Bitrate
+"VIDEO_BITRATE" = "Video Bitrate(kbps)";
+"VIDEO_ARS" = "Video ARS";
+"VIDEO_RESOLUTION_SETTINGS" = "Video Resolution"; // Video Resolution
+"VIDEO_RESOLUTION" = "Default Video Resolution";
+"VIDEO_AUTO_RESOLUTION" = "Video Auto Resolution";
+"VIDEO_FRAMERATE_SETTINGS" = "Video Framerate"; // Video Framerate
+"VIDEO_FRAMERATE" = "Video Framerate(fps)(1-30)";
+"VIDEO_AUTO_FRAMERATE" = "Video Auto Framerate";
+"VIDEO_QOS_SETTINGS" = "Video QoS Settings"; // Video QoS Settings
+"VIDEO_KEY_FRAMERATE_PERIOD" = "Video Key Framerate Period(ms)(0-600000)";
+"VIDEO_KEY_FRAMERATE_BY_INFO" = "Video Key Framerate By Info";
+"VIDEO_RPSI" = "Video RPSI";
+"VIDEO_FEC" = "Video FEC";
+"VIDEO_NACK" = "Video NACK";
+"VIDEO_RTX" = "Video RTX";
+"VIDEO_BEM" = "Video BEM";
+"VIDEO_ORIENT" = "Video Orient";
+
+// network
+"NETWORK" = "Network";
+"MEDIA_TRANSFER_SETTINGS" = "Media Transfer Settings"; // Media Transfer Settings
+"SRTP_ENCRYPTION_TYPE" = "SRTP Encryption Type";
+"AUDIO_RTP_RTCP_PORT_REUSE" = "Audio RTP/RTCP Port Reuse";
+"VIDEO_RTP_RTCP_PORT_REUSE" = "Video RTP/RTCP Port Reuse";
+"NAT_TRANVERSAL_SETTINGS" = "NAT Traversal Settings"; // NAT Traversal Settings
+"NAT_TRAVERSAL_TYPE" = "NAT Traversal Type";
+"STUN_SERVER" = "STUN Server";
+"STUN_PORT" = "STUN Port";
+
+"SAVE" = "Save";
+"NO_CODEC_DESCRIPTION" = "You have to choose at least one codec!";
+"OUT_OF_RANGE" = "Out of range!";
+"INVALIDID_STRING" = "Input the right value!";
+
+// 通用
+"UNKNOWN" = "unknown";
+"DELETE" = "Delete";
+"AUDIO" = "Audio";
+"VIDEO" = "Video";
+"MULTI_CALL" = "Multi Call";
+"REGULAR" = "Regular";
+"OK" = "Ok";
+"CANCEL" = "Cancel";
+"FORBIDDEN" = "Forbidden";
+"ALREADY_FORBIDDEN" = "Already Forbidden";
+"LOGIN_FIRST" = "Please Login First";
+"ERROR" = "Error";
+
+"ADD_CONTACT" = "Add Contact";
+"DELETE_CONTACT" = "Delete Contact";
+"CREATE_CONTACT" = "Create Contact";
+"ADD_TO_EXIST_CONTACT" = "Add to Exist Contact";
+
+// 电话
+"UPDATE_VIDEO" = "Update Video";
+"TRANSFER_CALL" = "Transfer Call";
+"CALLING" = "calling";
+"RINGING" = "ringing";
+"CONNECTING" = "connecting";
+"PENDING" = "pending";
+"END" = "end";
+"DECLINED" = "declined";
+"MISSED" = "missed";
+"HOLDING" = "Holding";
+"HELDING" = "Helding";
+"FORWARDING" = "Forwarding";
+"INCOMING_CALL" = "incoming";
+"ANSWER" = "answer";
+"ADD_CALL" = "Add Call";
+"HAVE_QUOTA" = "%ld Minute Be Left";
+"QUOTA" = "Quota";
+"REQUEST_VIDEO" = "Receive Video Request";
+"CONNED" = "connected";
+"MUTED" = "muted";
+"NEW_CALL" = "New Call";
+"ADD_MEMBER" = "Invite This Number?";
+"REMOVE_MEMBER" = "Remove This Number?";
+"NO_QUOTA" = "Unable To Start Call, Check You Quota";
+"TO_AUDIO_FAILED" = "Unable To Turn Auido Or Request Has Been Denied";
+"TO_VIDEO_FAILED" = "Unable To Turn Video Or Request Has Been Denied";
+
+// 默认铃声
+"MUSIC_BOX" = "Music Box";
+"WAKING_UP" = "Waking Up";
+"BEATING_FINGERTIP" = "Beating Fingertip";
+"A_JOURNEY" = "A Journey";
+"MORNING" = "Morning";
+"HAPPY_HOLIDAY" = "Happy Holiday";
+"POTPOURRI" = "Potpourri";
+"DREAM" = "Dream";
+"SPRING_DING-DONG" = "Spring Ding-Dong";
+"CHILDHOOD" = "Childhood";
+"RAIN_IN_MARCH" = "Rain in March";
+"MOONLIGHT_SHIMMER" = "Moonlight Shimmer";
+
+// 录音
+"DELETE_ALL_RECORDS" = "Delete All Records";
+"RECORD_TIME" = "Record Time";
+
+// 通话记录
+"DELETE_ALL_CALLS" = "Delete All Calls";
+"MISS_CALL_COUNT" = "You have %d miss call";
+
+// 消息
+"MESSAGE" = "Chat";
+"DELETE_CONVERSATION" = "Delete Conversation";
+"INPUT_SOMETHING" = "Say Someting";
+"CANNOT_SEND_EMPTY_MESSAGE" = "Can't Send Empty Message";
+"GET_CONVERSATIONS_FAILED" = "No Data, Please Check Your Account State!";
+"SEND_MESSAGE_FAILED" = "Send Message Failed, Please Check Your Account State!";
+"RECORD_TIPS" = "Hold To Talk";
+"RECORD_COMPLETE" = "Record Complete";
+"SEND_FILE" = "Send(%lu/%ld)";
+"ABOVE_THE_LIMIT" = "Above The Limit";
+"CAN_NOT_SELECT_MULTI_TYPE" = "Can't Select Multi Type Files";
+"LOADING_ASSET" = "Loading...";
+"LOADING_ASSET_FAILED" = "Load Failed";
+"ALBUM" = "Album";
+"ORIGINAL_IMAGE" = "Original";
+"LOCATION" = "Location";
+"LOADING_LOCATION" = "Loading...";
+"SEND" = "Send";
+"MJ_LOAD_MORE" = "Pull To Load More";
+"MJ_LOADING" = "Loading...";
+"MJ_LOAD_COMPLETE" = "Load Complete";
+"NEW_CONVERSATION" = "Creat New Chat";
+"INPUT_PEER_NUMBER" = "Input Number";
+"MESSAGE_UNKNOW" = "[Unknow]";
+"MESSAGE_LOCATION" = "[Location]";
+"MESSAGE_AUDIO" = "[Audio]";
+"MESSAGE_IMAGE" = "[Photo]";
+"MESSAGE_VCARD" = "[VCard]";
+"MESSAGE_VIDEO" = "[Video]";
+"MESSAGE_FILE" = "[File]";
+"OTHER_FILES" = "Other Files";
+"NO_OTHER_FILES" = "Other Files Not Exist";
+"NO_CONVERSATION" = "No Conversation, Click Button To Creat New Conversation";
+"RESEND_MESSAGE" = "Resend This Message?";
+"NOT_SUPPORT" = "Not Support To Look Through";
+
+// 群
+"GROUP_LIST" = "Group List";
+"SUB_GROUP_LIST_FAILED" = "Subscribe To Group List Failed";
+"GET_GROUPS_FAILED" = "No Data, Please Check Your Account State!";
+"GROUP_NOT_EXIST" = "Group Not Exist";
+"NEW_GROUP" = "New Group";
+"INPUT_GROUP_NAME" = "Input Group Name";

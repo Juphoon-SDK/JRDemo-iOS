@@ -1,0 +1,63 @@
+
+/* Class = "UITextField"; placeholder = "端口"; ObjectID = "23r-Cv-qD3"; */
+"23r-Cv-qD3.placeholder" = "端口";
+
+/* Class = "UITextField"; placeholder = "服务器"; ObjectID = "7Xd-g9-6sa"; */
+"7Xd-g9-6sa.placeholder" = "服务器";
+
+/* Class = "UITextField"; placeholder = "输入文本"; ObjectID = "AQm-HX-Hcc"; */
+"AQm-HX-Hcc.placeholder" = "输入文本";
+
+/* Class = "UISegmentedControl"; Akc-E9-7pR.segmentTitles[0] = "UDP"; ObjectID = "Akc-E9-7pR"; */
+"Akc-E9-7pR.segmentTitles[0]" = "UDP";
+
+/* Class = "UISegmentedControl"; Akc-E9-7pR.segmentTitles[1] = "TCP"; ObjectID = "Akc-E9-7pR"; */
+"Akc-E9-7pR.segmentTitles[1]" = "TCP";
+
+/* Class = "UISegmentedControl"; Akc-E9-7pR.segmentTitles[2] = "TLS"; ObjectID = "Akc-E9-7pR"; */
+"Akc-E9-7pR.segmentTitles[2]" = "TLS";
+
+/* Class = "UIButton"; normalTitle = "消息模块"; ObjectID = "B6f-mW-PN8"; */
+"B6f-mW-PN8.normalTitle" = "消息模块";
+
+/* Class = "UIButton"; normalTitle = "音频"; ObjectID = "Bmp-xu-eip"; */
+"Bmp-xu-eip.normalTitle" = "音频";
+
+/* Class = "UIButton"; normalTitle = "地理位置"; ObjectID = "EDA-wY-36D"; */
+"EDA-wY-36D.normalTitle" = "地理位置";
+
+/* Class = "UITextField"; placeholder = "密码"; ObjectID = "IzI-7F-ZnV"; */
+"IzI-7F-ZnV.placeholder" = "密码";
+
+/* Class = "UITextField"; placeholder = "用户名"; ObjectID = "N9k-IB-YJb"; */
+"N9k-IB-YJb.placeholder" = "用户名";
+
+/* Class = "UIButton"; normalTitle = "通话模块"; ObjectID = "NVh-Ui-Ymv"; */
+"NVh-Ui-Ymv.normalTitle" = "通话模块";
+
+/* Class = "UIButton"; normalTitle = "发送"; ObjectID = "UU2-68-fM9"; */
+"UU2-68-fM9.normalTitle" = "发送";
+
+/* Class = "UIButton"; normalTitle = "视频"; ObjectID = "Wj7-hg-1aJ"; */
+"Wj7-hg-1aJ.normalTitle" = "视频";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Xqt-1Z-yCw"; */
+"Xqt-1Z-yCw.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "服务器域名"; ObjectID = "cW1-46-85U"; */
+"cW1-46-85U.placeholder" = "服务器域名";
+
+/* Class = "UIButton"; normalTitle = "账号模块"; ObjectID = "gSL-7I-xez"; */
+"gSL-7I-xez.normalTitle" = "账号模块";
+
+/* Class = "UIButton"; normalTitle = "创建"; ObjectID = "jsY-3A-G5T"; */
+"jsY-3A-G5T.normalTitle" = "创建";
+
+/* Class = "UIButton"; normalTitle = "多方"; ObjectID = "sWK-M2-PlJ"; */
+"sWK-M2-PlJ.normalTitle" = "多方";
+
+/* Class = "UIButton"; normalTitle = "文件"; ObjectID = "tlW-CH-Ezg"; */
+"tlW-CH-Ezg.normalTitle" = "文件";
+
+/* Class = "UITextField"; placeholder = "鉴权名"; ObjectID = "v7b-Wt-BIu"; */
+"v7b-Wt-BIu.placeholder" = "鉴权名";
