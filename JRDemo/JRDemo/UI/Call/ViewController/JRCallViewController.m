@@ -108,11 +108,14 @@ static void vibrate()
     [self.multiCallTableView registerNib:[UINib nibWithNibName:@"JRCallMemberCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:MemberCell];
     
     self.videoReqAlert = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"REQUEST_VIDEO", nil) preferredStyle:UIAlertControllerStyleAlert];
+    @weakify(self)
     [self.videoReqAlert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        @strongify(self)
         [[JRCall sharedInstance] answerUpdate:YES];
         self.videoAlertShow = NO;
     }]];
     [self.videoReqAlert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"CANCEL", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        @strongify(self)
         [[JRCall sharedInstance] answerUpdate:NO];
         self.videoAlertShow = NO;
     }]];
@@ -140,11 +143,6 @@ static void vibrate()
     [super viewDidAppear:animated];
     // 保证frame
     [self updateVideoView];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [self stopTimer];
 }
 
 - (void)dealloc {
@@ -286,7 +284,9 @@ static void vibrate()
         [self presentViewController:self.videoReqAlert animated:YES completion:nil];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             if (self.videoAlertShow) {
+                @weakify(self)
                 [self.videoReqAlert dismissViewControllerAnimated:YES completion:^{
+                    @strongify(self)
                     self.videoAlertShow = NO;
                     [SVProgressHUD showErrorWithStatus:@"长时间未响应，已自动拒绝转视频请求"];
                     [[JRCall sharedInstance] answerUpdate:NO];
@@ -356,6 +356,7 @@ static void vibrate()
             [self.canvsArray removeObject:canvas];
         }
     }
+    [self stopTimer];
     [self updateUI];
 }
 
@@ -720,6 +721,9 @@ static void vibrate()
 #warning 代码冗余严重，之后应将多方语音也改为Collection布局
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    if ([JRCall sharedInstance].currentCall.type != JRCallTypeMultiVideo) {
+        return 0;
+    }
     return [JRCall sharedInstance].currentCall.callMembers.count;
 }
 
