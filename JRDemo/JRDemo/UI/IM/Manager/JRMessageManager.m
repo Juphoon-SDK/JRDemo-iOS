@@ -55,7 +55,6 @@
             [array addObject:[JRNumberUtil numberWithChineseCountryCode:number]];
         }
         item = [[JRMessage sharedInstance] sendTextMessage:message chatType:JRMessageChannelTypeList extraParams:array];
-        
     }
     if (item) {
         // 成功则插入
@@ -333,7 +332,7 @@
             formatNumber = item.sessIdentity;
             obj.isRead = [obj.peerNumber isEqualToString:self.currentNumber];
         } else {
-            formatNumber = [JRNumberUtil numberWithChineseCountryCode:item.senderNumber];
+            formatNumber = [JRNumberUtil numberWithChineseCountryCode:obj.peerNumber];
             obj.isRead = [JRNumberUtil isNumberEqual:obj.peerNumber secondNumber:self.currentNumber];
         }
         
@@ -383,7 +382,7 @@
             formatNumber = item.sessIdentity;
             obj.isRead = [obj.peerNumber isEqualToString:self.currentNumber];
         } else {
-            formatNumber = [JRNumberUtil numberWithChineseCountryCode:item.senderNumber];
+            formatNumber = [JRNumberUtil numberWithChineseCountryCode:obj.peerNumber];
             obj.isRead = [JRNumberUtil isNumberEqual:obj.peerNumber secondNumber:self.currentNumber];
         }
         JRConversationObject *conversation = [JRMessageDBHelper getConversationWithNumber:formatNumber group:item.sessIdentity.length];
@@ -433,7 +432,7 @@
         formatNumber = item.sessIdentity;
         obj.isRead = [obj.peerNumber isEqualToString:self.currentNumber];
     } else {
-        formatNumber = [JRNumberUtil numberWithChineseCountryCode:item.senderNumber];
+        formatNumber = [JRNumberUtil numberWithChineseCountryCode:obj.peerNumber];
         obj.isRead = [JRNumberUtil isNumberEqual:obj.peerNumber secondNumber:self.currentNumber];
     }
     // 存缩略图

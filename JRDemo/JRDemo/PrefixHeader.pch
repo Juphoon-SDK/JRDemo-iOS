@@ -41,10 +41,7 @@
 #endif
 #endif
 
-#import "service/rcs/mtccom.h"
-#import "service/rcs/mtccp.h"
-#import "service/rcs/mtcmsg.h"
-#import "service/rcs/mtcvoip.h"
+#import "service/rcs/mtc.h"
 #import <JRSDK/JRSDK.h>
 
 #import "JRFileUtil.h"

@@ -81,7 +81,7 @@ static NSString * const NormalCellId = @"NormalCellId";
 @property (nonatomic, strong) JREditCell *mVideoKeyFrameratePeriodCell;
 @property (nonatomic, strong) UITableViewCell *mVideoKeyFramerateByInfoCell;
 @property (nonatomic, strong) JRSwitchCell *mVideoRpsiCell;
-@property (nonatomic, strong) JRSwitchCell *mVideoFecCell;
+@property (nonatomic, strong) UITableViewCell *mVideoFecCell;
 @property (nonatomic, strong) JRSwitchCell *mVideoNackCell;
 @property (nonatomic, strong) JRSwitchCell *mVideoRtxCell;
 @property (nonatomic, strong) JRSwitchCell *mVideoBemCell;
@@ -206,9 +206,24 @@ static NSString * const NormalCellId = @"NormalCellId";
     self.mVideoRpsiCell.titleLabel.text = NSLocalizedString(@"VIDEO_RPSI", nil);
     self.mVideoRpsiCell.switchView.on = [JRAccount getAccountConfig:self.account forKey:JRAccountConfigKeyVideoRpsi].boolParam;
     
-    self.mVideoFecCell = [self.tableView dequeueReusableCellWithIdentifier:SwitchCellId];
-    self.mVideoFecCell.titleLabel.text = NSLocalizedString(@"VIDEO_FEC", nil);
-    self.mVideoFecCell.switchView.on = [JRAccount getAccountConfig:self.account forKey:JRAccountConfigKeyVideoFec].boolParam;
+    self.mVideoFecCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:NormalCellId];
+    self.mVideoFecCell.textLabel.text = NSLocalizedString(@"VIDEO_FEC", nil);
+    self.mVideoFecCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    NSInteger videoFec = [JRAccount getAccountConfig:self.account forKey:JRAccountConfigKeyVideoFec].enumParam;
+    switch (videoFec) {
+        case 0:
+            self.mVideoFecCell.detailTextLabel.text = @"None";
+            break;
+        case 1:
+            self.mVideoFecCell.detailTextLabel.text = @"Red";
+            break;
+        case 2:
+            self.mVideoFecCell.detailTextLabel.text = @"Multi SSRC";
+            break;
+        default:
+            self.mVideoFecCell.detailTextLabel.text = nil;
+            break;
+    }
     
     self.mVideoNackCell = [self.tableView dequeueReusableCellWithIdentifier:SwitchCellId];
     self.mVideoNackCell.titleLabel.text = NSLocalizedString(@"VIDEO_NACK", nil);
@@ -259,10 +274,6 @@ static NSString * const NormalCellId = @"NormalCellId";
     JRAccountConfigParam *videoRpsiParam = [[JRAccountConfigParam alloc] init];
     videoRpsiParam.boolParam = self.mVideoRpsiCell.switchView.on;
     [JRAccount setAccount:self.account config:videoRpsiParam forKey:JRAccountConfigKeyVideoRpsi];
-    
-    JRAccountConfigParam *videoFecParam = [[JRAccountConfigParam alloc] init];
-    videoFecParam.boolParam = self.mVideoFecCell.switchView.on;
-    [JRAccount setAccount:self.account config:videoFecParam forKey:JRAccountConfigKeyVideoFec];
     
     JRAccountConfigParam *videoNackParam = [[JRAccountConfigParam alloc] init];
     videoNackParam.boolParam = self.mVideoNackCell.switchView.on;
@@ -404,6 +415,9 @@ static NSString * const NormalCellId = @"NormalCellId";
     } else if (indexPath.section == VideoSettingSectionQos) {
         if (indexPath.row == QosSettingsRowFramerateByInfo) {
             view.key = JRAccountConfigKeyVideoKeyFramerateByInfo;
+            shouldPush = YES;
+        } else if (indexPath.row == QosSettingsRowFec) {
+            view.key = JRAccountConfigKeyVideoFec;
             shouldPush = YES;
         }
     }

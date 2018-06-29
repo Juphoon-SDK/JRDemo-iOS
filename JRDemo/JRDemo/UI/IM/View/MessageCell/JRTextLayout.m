@@ -13,7 +13,7 @@
 - (void)configWithMessage:(JRMessageObject *)message shouldShowTime:(BOOL)showTime shouldShowName:(BOOL)showName {
     [super configWithMessage:message shouldShowTime:showTime shouldShowName:showName];
     _contentLabelText = self.message.content;
-    if (self.message.direction == JRMessageItemDirectionSend) {
+    if (self.message.direction == JRMessageItemDirectionSend || self.message.isCarbonCopy) {
         _contentLabelTextColor = [UIColor whiteColor];
     } else {
         _contentLabelTextColor = [UIColor blackColor];

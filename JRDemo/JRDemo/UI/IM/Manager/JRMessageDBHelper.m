@@ -164,6 +164,11 @@
     message.messageType = obj.type;
     message.messageState = obj.state;
     message.messageDirection = obj.direction;
+    message.isBurnAfterReading = obj.isBurnAfterReading;
+    message.isSilence = obj.isSilence;
+    message.isDirect = obj.isDirect;
+    message.isCarbonCopy = obj.isCarbonCopy;
+    message.isOffline = obj.isOffline;
     if (obj.groupChatId.length) {
         message.groupChatId = obj.groupChatId;
         message.sessIdentity = obj.peerNumber;
@@ -190,6 +195,11 @@
     message.messageType = obj.type;
     message.messageState = obj.state;
     message.messageDirection = obj.direction;
+    message.isBurnAfterReading = obj.isBurnAfterReading;
+    message.isSilence = obj.isSilence;
+    message.isDirect = obj.isDirect;
+    message.isCarbonCopy = obj.isCarbonCopy;
+    message.isOffline = obj.isOffline;
     if (obj.groupChatId.length) {
         message.groupChatId = obj.groupChatId;
         message.sessIdentity = obj.peerNumber;

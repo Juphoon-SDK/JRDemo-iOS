@@ -51,7 +51,7 @@
             break;
     }
     
-    _avatorViewImage = self.message.direction == JRMessageItemDirectionSend ? [UIImage imageNamed:@"img_blueman_nor"] : [UIImage imageNamed:@"img_greenman_nor"];
+    _avatorViewImage = self.message.direction == JRMessageItemDirectionSend || self.message.isCarbonCopy ? [UIImage imageNamed:@"img_blueman_nor"] : [UIImage imageNamed:@"img_greenman_nor"];
     if (self.message.groupChatId.length) {
         _nameLabelText = [JRGroupDBManager getGroupMemberWithIdentity:self.message.peerNumber number:self.message.senderNumber].displayName;
     }
@@ -67,7 +67,7 @@
     }
     
     CGSize bubbleSize = [self calculateBubbleViewSize];
-    if (self.message.direction == JRMessageItemDirectionSend) {
+    if (self.message.direction == JRMessageItemDirectionSend || self.message.isCarbonCopy) {
         _nameLabelTextAlignment = NSTextAlignmentRight;
         _avatorViewFrame = CGRectMake(CellWidth-(AvatorSize+Margin), avatorY+Margin, AvatorSize, AvatorSize);
         _bubbleViewFrame = CGRectMake(CellWidth-(CGRectGetWidth(_avatorViewFrame)+2*Margin)-bubbleSize.width, avatorY+Margin, bubbleSize.width, bubbleSize.height);

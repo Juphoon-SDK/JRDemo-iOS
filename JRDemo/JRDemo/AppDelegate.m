@@ -16,6 +16,7 @@
 
 #define UC_TOKEN_APPID  @"01000107"
 #define UC_TOKEN_APPKEY @"2396E39A4054A522"
+#define LICENSE_APPKEY @"2796fe4f06e6b466"
 
 @interface AppDelegate ()
 
@@ -32,12 +33,14 @@
     [JRMessageManager shareInstance];
     [JRAutoConfig sharedInstance];
     [JRGroupManager sharedInstance];
+    [JRCapacity sharedInstance];
+    [JRProfile sharedInstance];
     
     // 统一认证初始化
     [[JRAutoConfigManager sharedInstance] initAutoLoginWithAppId:UC_TOKEN_APPID andAppKey:UC_TOKEN_APPKEY timeoutInterval:120];
 
     NSString *bundleLcsPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"license.sign"];
-    [[JRClient sharedInstance] startInitSDK:bundleLcsPath];
+    [[JRClient sharedInstance] startInitSDK:bundleLcsPath appKey:LICENSE_APPKEY deviceType:JRClientDeviceTypeApp];
     
     [UINavigationBar appearance].shadowImage = [UIImage new];
     [UINavigationBar appearance].translucent = NO;
@@ -60,11 +63,13 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [[JRClient sharedInstance] setBackgroud:YES];
 }
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    [[JRClient sharedInstance] setBackgroud:NO];
     [[JRClient sharedInstance] refresh];
 }
 

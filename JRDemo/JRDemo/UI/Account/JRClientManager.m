@@ -47,6 +47,11 @@ NSString * const kClientReasonKey = @"kClientReasonKey";
                 self.multiVideoToken = token;
             }
         }];
+        [[JRAutoConfigManager sharedInstance] requestAccessTokenFinishBlock:^(NSString *token) {
+            if (token.length) {
+                [[JRProfile sharedInstance] setToken:token];
+            }
+        }];
     }
 }
 
