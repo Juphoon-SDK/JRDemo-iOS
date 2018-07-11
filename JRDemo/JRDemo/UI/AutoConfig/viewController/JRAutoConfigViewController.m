@@ -42,7 +42,14 @@
 #pragma mark - JRAutoConfigManagerDelegate
 
 - (void)cmccCpGetAuthInformationSucceed:(NSString *)userName password:(NSString *)password token:(NSString *)token {
-    [[JRAutoConfig sharedInstance] startAutoConfig:userName password:password token:token];
+    [[JRAutoConfig sharedInstance] startAutoConfig:userName password:password token:token port:JRAutoConfigPortTest];
+//    // 测试局下多方视频appId
+//    JRAccountConfigParam *param = [[JRAccountConfigParam alloc] init];
+//    // 和飞信
+//    param.stringParam = @"47";
+//    // 菊风
+//    param.stringParam = @"189";
+//    [JRAccount setAccount:userName config:param forKey:JRAccountConfigKeyConfId];
 }
 
 - (void)cmccCpGetAuthInformationFailed:(NSUInteger)resultCode {

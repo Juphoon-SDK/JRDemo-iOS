@@ -14,9 +14,9 @@
 #import "JRGroupManager.h"
 #import "JRAutoConfigManager.h"
 
-#define UC_TOKEN_APPID  @"01000107"
-#define UC_TOKEN_APPKEY @"2396E39A4054A522"
-#define LICENSE_APPKEY @"2796fe4f06e6b466"
+#define UC_TOKEN_APPID  @""
+#define UC_TOKEN_APPKEY @""
+#define LICENSE_APPKEY @""
 
 @interface AppDelegate ()
 
