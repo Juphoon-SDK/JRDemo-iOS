@@ -38,6 +38,8 @@
         self.isDirect = message.isDirect;
         self.isCarbonCopy = message.isCarbonCopy;
         self.isOffline = message.isOffline;
+        self.imdnType = message.imdnType;
+        self.conversationId = message.conversationId;
     }
     return self;
 }
@@ -46,6 +48,7 @@
     if ([self initWithMessage:message]) {
         self.content = message.content;
         self.isAtMsg = message.isAtMsg;
+        self.contentType = message.contentType;
     }
     return self;
 }

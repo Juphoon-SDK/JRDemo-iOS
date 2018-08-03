@@ -161,6 +161,21 @@
 @property JRMessageChannelType channelType;
 
 /**
+ 回执类型
+ */
+@property JRMessageItemImdnType imdnType;
+
+/**
+ conversationId
+ */
+@property NSString *conversationId;
+
+/**
+ 文本消息拓展类型
+ */
+@property JRTextMessageContentType contentType;
+
+/**
  根据item初始化
 
  @param message item

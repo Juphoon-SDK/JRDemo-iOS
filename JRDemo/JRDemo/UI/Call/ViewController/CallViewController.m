@@ -9,6 +9,7 @@
 #import "CallViewController.h"
 #import "JRRecentCallViewController.h"
 #import "JRClientManager.h"
+#import "JRAutoConfigManager.h"
 
 @interface CallViewController ()
 
@@ -40,6 +41,7 @@
 - (IBAction)videoCall:(id)sender {
     [[JRCall sharedInstance] call:self.numberField.text video:true];
 }
+
 - (IBAction)multiCall:(id)sender {
     NSArray *numbers = [self.numberField.text componentsSeparatedByString:@"#"];
     [[JRCall sharedInstance] createMultiCall:numbers video:NO token:nil];
@@ -53,7 +55,11 @@
 
 - (IBAction)multiVideo:(id)sender {
     NSArray *numbers = [self.numberField.text componentsSeparatedByString:@"#"];
-    [[JRCall sharedInstance] createMultiCall:numbers video:YES token:[JRClientManager sharedInstance].multiVideoToken];
+    [[JRAutoConfigManager sharedInstance] requestAccessTokenFinishBlock:^(NSString *token) {
+        if (token.length) {
+            [[JRCall sharedInstance] createMultiCall:numbers video:YES token:token];
+        }
+    }];
 }
 
 @end

@@ -25,6 +25,7 @@
 #define LocationSize CGSizeMake(200, 150)
 #define VCardSize CGSizeMake(200, 100)
 #define OtherFileSize CGSizeMake(200, 100)
+#define ExVCardSize CGSizeMake(200, 200)
 
 @interface JRBaseBubbleLayout : NSObject
 

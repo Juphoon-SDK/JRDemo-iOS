@@ -22,6 +22,12 @@
 }
 
 - (void)creatLayoutWithMessage:(JRMessageObject *)message showTime:(BOOL)showTime {
+    if (message.state == JRMessageItemStateRevoked) {
+        JRRevokeLayout *layout = [[JRRevokeLayout alloc] init];
+        [layout configWithMessage:message];
+        [self.layoutDic setObject:layout forKey:message.imdnId];
+        return;
+    }
     switch (message.type) {
         case JRMessageItemTypeNotify: {
             JRGroupNotifyLayout *layout = [[JRGroupNotifyLayout alloc] init];
@@ -30,9 +36,15 @@
             break;
         }
         case JRMessageItemTypeText: {
-            JRTextLayout *layout = [[JRTextLayout alloc] init];
-            [layout configWithMessage:message shouldShowTime:showTime shouldShowName:YES];
-            [self.layoutDic setObject:layout forKey:message.imdnId];
+            if (message.contentType == JRTextMessageContentTypeDefault) {
+                JRTextLayout *layout = [[JRTextLayout alloc] init];
+                [layout configWithMessage:message shouldShowTime:showTime shouldShowName:YES];
+                [self.layoutDic setObject:layout forKey:message.imdnId];
+            } else {
+                JRExVCardLayout *layout = [[JRExVCardLayout alloc] init];
+                [layout configWithMessage:message shouldShowTime:showTime shouldShowName:YES];
+                [self.layoutDic setObject:layout forKey:message.imdnId];
+            }
             break;
         }
         case JRMessageItemTypeImage:

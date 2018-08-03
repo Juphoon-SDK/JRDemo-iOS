@@ -14,6 +14,7 @@
 #import "JRAudioSettingsViewController.h"
 #import "JRVideoSettingsViewController.h"
 #import "JRAdvancedChooseViewController.h"
+#import "JRMessageSettingsViewController.h"
 
 typedef NS_ENUM(NSInteger, AccountSettingSection) {
     AccountSettingSectionNormal,
@@ -37,6 +38,7 @@ typedef NS_ENUM(NSInteger, AdvancedSettingRow) {
     AdvancedSettingRowAudio,
     AdvancedSettingRowVideo,
     AdvancedSettingRowNet,
+    AdvancedSettingRowMessage,
     AdvancedSettingRowDelete,
     AdvancedSettingRowCount,
 };
@@ -59,6 +61,7 @@ static NSString * const NormalCellId = @"NormalCellId";
 @property (nonatomic, strong) UITableViewCell *mAudioCell;
 @property (nonatomic, strong) UITableViewCell *mVideoCell;
 @property (nonatomic, strong) UITableViewCell *mNetworkCell;
+@property (nonatomic, strong) UITableViewCell *mMessageCell;
 @property (nonatomic, strong) UITableViewCell *mDeleteCell;
 
 @property (nonatomic, assign) BOOL isDelete;
@@ -152,6 +155,10 @@ static NSString * const NormalCellId = @"NormalCellId";
     self.mNetworkCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     self.mNetworkCell.textLabel.text = NSLocalizedString(@"TRANSFER_SETTING", nil);
     
+    self.mMessageCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:NormalCellId];
+    self.mMessageCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    self.mMessageCell.textLabel.text = NSLocalizedString(@"消息", nil);
+    
     self.mDeleteCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:NormalCellId];
     self.mDeleteCell.accessoryType = UITableViewCellAccessoryNone;
     self.mDeleteCell.textLabel.textColor = [UIColor redColor];
@@ -240,6 +247,8 @@ static NSString * const NormalCellId = @"NormalCellId";
                 return self.mNetworkCell;
             case AdvancedSettingRowDelete:
                 return self.mDeleteCell;
+            case AdvancedSettingRowMessage:
+                return self.mMessageCell;
             default:
                 return [[UITableViewCell alloc] init];
         }
@@ -278,6 +287,12 @@ static NSString * const NormalCellId = @"NormalCellId";
             }
             case AdvancedSettingRowNet: {
                 JRNetSettingsViewController *view = [[JRNetSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+                view.account = self.account;
+                [self.navigationController pushViewController:view animated:YES];
+                break;
+            }
+            case AdvancedSettingRowMessage: {
+                JRMessageSettingsViewController *view = [[JRMessageSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
                 view.account = self.account;
                 [self.navigationController pushViewController:view animated:YES];
                 break;

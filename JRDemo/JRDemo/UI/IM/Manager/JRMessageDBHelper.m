@@ -9,6 +9,7 @@
 #import "JRMessageDBHelper.h"
 #import "JRMessageObject.h"
 #import "JRNumberUtil.h"
+#import "JRMessageManager.h"
 
 @implementation JRMessageDBHelper
 
@@ -24,6 +25,13 @@
         for (int i=0; i<count; i++) {
             JRMessageObject *message = results[0];
             message.isRead = YES;
+            if (message.imdnType == JRMessageItemImdnTypeBoth || message.imdnType == JRMessageItemImdnTypeDisp) {
+                // 发送已读回执
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[JRMessageManager shareInstance] sendCommand:message command:JRMessageCommandTypeRead group:nil];
+                });
+                
+            }
         }
         [realm commitWriteTransaction];
     }
@@ -155,6 +163,34 @@
     }
 }
 
++ (JRTextMessageItem *)converTextMessage:(JRMessageObject *)obj {
+    JRTextMessageItem *message = [[JRTextMessageItem alloc] init];
+    message.messageImdnId = obj.imdnId;
+    message.senderNumber = obj.senderNumber;
+    message.receiverNumber = obj.receiverNumber;
+    message.timestamp = [obj.timestamp longLongValue];
+    message.messageType = obj.type;
+    message.messageState = obj.state;
+    message.messageDirection = obj.direction;
+    message.isBurnAfterReading = obj.isBurnAfterReading;
+    message.isSilence = obj.isSilence;
+    message.isDirect = obj.isDirect;
+    message.isCarbonCopy = obj.isCarbonCopy;
+    message.isOffline = obj.isOffline;
+    if (obj.groupChatId.length) {
+        message.groupChatId = obj.groupChatId;
+        message.sessIdentity = obj.peerNumber;
+    }
+    message.messageChannelType = obj.channelType;
+    message.imdnType = obj.imdnType;
+    message.conversationId = obj.conversationId;
+    
+    message.content = obj.content;
+    message.isAtMsg = obj.isAtMsg;
+    message.contentType = obj.contentType;
+    return message;
+}
+
 + (JRFileMessageItem *)converFileMessage:(JRMessageObject *)obj {
     JRFileMessageItem *message = [[JRFileMessageItem alloc] init];
     message.messageImdnId = obj.imdnId;
@@ -173,6 +209,9 @@
         message.groupChatId = obj.groupChatId;
         message.sessIdentity = obj.peerNumber;
     }
+    message.messageChannelType = obj.channelType;
+    message.imdnType = obj.imdnType;
+    message.conversationId = obj.conversationId;
     
     message.fileName = obj.fileName;
     message.fileType = obj.fileType;
@@ -182,7 +221,6 @@
     message.fileSize = [obj.fileSize integerValue];
     message.fileTransSize = [obj.fileTransSize integerValue];
     message.fileTransId = obj.transId;
-    message.messageChannelType = obj.channelType;
     return message;
 }
 
@@ -204,13 +242,15 @@
         message.groupChatId = obj.groupChatId;
         message.sessIdentity = obj.peerNumber;
     }
+    message.messageChannelType = obj.channelType;
+    message.imdnType = obj.imdnType;
+    message.conversationId = obj.conversationId;
     
     message.geoLatitude = [obj.geoLatitude floatValue];
     message.geoLongitude = [obj.geoLongitude floatValue];
     message.geoRadius = [obj.geoRadius floatValue];
     message.geoFreeText = obj.geoFreeText;
     message.geoTransId = obj.transId;
-    message.messageChannelType = obj.channelType;
     return message;
 }
 

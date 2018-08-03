@@ -7,6 +7,7 @@
 //
 
 #import "JRLoadIconViewController.h"
+#import "JRAutoConfigManager.h"
 
 @interface JRLoadIconViewController () <JRProfileCallback>
 
@@ -35,14 +36,26 @@
 }
 
 - (IBAction)loadSelfIcon:(id)sender {
-    [[JRProfile sharedInstance] loadSelfIcon:JRProfileIconSolution42];
+    [[JRAutoConfigManager sharedInstance] requestAccessTokenFinishBlock:^(NSString *token) {
+        if (token.length) {
+            [[JRProfile sharedInstance] loadSelfIcon:JRProfileIconSolution42 token:token];
+        }
+    }];
 }
 
 - (IBAction)loadUserIcon:(id)sender {
-    [[JRProfile sharedInstance] loadUserIcon:self.numberField.text solution:JRProfileIconSolution42];
+    [[JRAutoConfigManager sharedInstance] requestAccessTokenFinishBlock:^(NSString *token) {
+        if (token.length) {
+            [[JRProfile sharedInstance] loadUserIcon:self.numberField.text solution:JRProfileIconSolution42 token:token];
+        }
+    }];
 }
 - (IBAction)updateSelfIcon:(id)sender {
-    [[JRProfile sharedInstance] updateSelfIcon:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"defaultIcon.jpg"]];
+    [[JRAutoConfigManager sharedInstance] requestAccessTokenFinishBlock:^(NSString *token) {
+        if (token.length) {
+            [[JRProfile sharedInstance] updateSelfIcon:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"defaultIcon.jpg"] token:token];
+        }
+    }];
 }
 
 #pragma mark - JRProfileCallback

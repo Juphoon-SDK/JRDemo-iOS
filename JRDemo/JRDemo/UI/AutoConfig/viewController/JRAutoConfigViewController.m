@@ -13,6 +13,8 @@
 
 @interface JRAutoConfigViewController () <JRAutoConfigManagerDelegate, JRAutoConfigCallback>
 
+@property (nonatomic, assign) JRAutoConfigPort port;
+
 @end
 
 @implementation JRAutoConfigViewController
@@ -29,9 +31,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [[JRAutoConfigManager sharedInstance] requestLoginAuthInPs];
     self.view.backgroundColor = [UIColor whiteColor];
-    [SVProgressHUD showWithStatus:@"自动配置中.."];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"选择自动配置环境" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *commercial = [UIAlertAction actionWithTitle:@"商用局" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        self.port = JRAutoConfigPortCommercial;
+        [[JRAutoConfigManager sharedInstance] requestLoginAuthInPs];
+        [SVProgressHUD showWithStatus:@"自动配置中.."];
+    }];
+    UIAlertAction *test = [UIAlertAction actionWithTitle:@"测试局" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        self.port = JRAutoConfigPortTest;
+        [[JRAutoConfigManager sharedInstance] requestLoginAuthInPs];
+        [SVProgressHUD showWithStatus:@"自动配置中.."];
+    }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:commercial];
+    [alert addAction:test];
+    [alert addAction:cancel];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -42,14 +62,16 @@
 #pragma mark - JRAutoConfigManagerDelegate
 
 - (void)cmccCpGetAuthInformationSucceed:(NSString *)userName password:(NSString *)password token:(NSString *)token {
-    [[JRAutoConfig sharedInstance] startAutoConfig:userName password:password token:token port:JRAutoConfigPortTest];
-//    // 测试局下多方视频appId
-//    JRAccountConfigParam *param = [[JRAccountConfigParam alloc] init];
-//    // 和飞信
-//    param.stringParam = @"47";
-//    // 菊风
-//    param.stringParam = @"189";
-//    [JRAccount setAccount:userName config:param forKey:JRAccountConfigKeyConfId];
+    [[JRAutoConfig sharedInstance] startAutoConfig:userName password:password token:token port:self.port];
+    if (self.port == JRAutoConfigPortTest) {
+        //    // 测试局下多方视频appId
+        JRAccountConfigParam *param = [[JRAccountConfigParam alloc] init];
+        //    // 和飞信
+        //    param.stringParam = @"47";
+        //    // 菊风
+        param.stringParam = @"189";
+        [JRAccount setAccount:userName config:param forKey:JRAccountConfigKeyConfId];
+    }
 }
 
 - (void)cmccCpGetAuthInformationFailed:(NSUInteger)resultCode {
@@ -75,9 +97,8 @@
     [[JRAutoConfigManager sharedInstance] requestLoginAuthInPs];
 }
 
-- (NSString *)onAutoConfigAuthInd {
-    // 应缓存token在此
-    return nil;
+- (void)onAutoConfigAuthInd {
+    [[JRAutoConfigManager sharedInstance] requestLoginAuthInPs];
 }
 
 - (void)didReceiveMemoryWarning {

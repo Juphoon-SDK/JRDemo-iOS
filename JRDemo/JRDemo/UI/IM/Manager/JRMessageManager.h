@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "JRMessageObject.h"
 #import "JRGroupObject.h"
+#import "JRGroupMemberObject.h"
 
 @interface JRMessageManager : NSObject <JRMessageCallback>
 
@@ -24,18 +25,22 @@
 
  @param message 内容
  @param number 对方号码
+ @param contentType 文本消息拓展类型
+ @param convId 仅当JRTextMessageContentTypeAgreeExchangeVCard需要
  @return 成功失败
  */
-- (BOOL)sendTextMessage:(NSString *)message number:(NSString *)number;
+- (BOOL)sendTextMessage:(NSString *)message number:(NSString *)number contentType:(JRTextMessageContentType)contentType convId:(NSString *)convId;
 
 /**
  发送文本消息
  
  @param message 内容
  @param group 群组
+ @param atMembers @的成员
+ @param atAll 是否@所有成员
  @return 成功失败
  */
-- (BOOL)sendTextMessage:(NSString *)message group:(JRGroupObject *)group;
+- (BOOL)sendTextMessage:(NSString *)message group:(JRGroupObject *)group members:(NSArray<JRGroupMemberObject *> *)atMembers atAll:(BOOL)atAll;
 
 /**
  发送文件
@@ -106,5 +111,15 @@
  @return 成功失败
  */
 - (BOOL)resendMessage:(JRMessageObject *)message;
+
+/**
+ 发送指令
+
+ @param message 消息对象
+ @param command 指令类型
+ @param group 群对象，只在群消息时使用
+ @return 成功失败
+ */
+- (BOOL)sendCommand:(JRMessageObject *)message command:(JRMessageCommandType)command group:(JRGroupObject *)group;
 
 @end

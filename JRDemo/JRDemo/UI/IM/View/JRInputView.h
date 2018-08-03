@@ -20,8 +20,10 @@
 @optional
 
 - (void)didBeginEditing;
+- (void)didAtMemberInGroupChat;
 
 - (void)sendMessage:(NSString *)message;
+
 
 - (void)menuViewShow;
 - (void)menuViewHide;
@@ -47,5 +49,8 @@
 @property (nonatomic, weak) id<JRInputViewDelegate> delegate;
 @property (nonatomic, assign) CGFloat headHeight;
 @property (nonatomic, assign) BOOL isMenuViewShow;
+
+- (void)addContent:(NSString *)content;
+- (void)beginEditing;
 
 @end

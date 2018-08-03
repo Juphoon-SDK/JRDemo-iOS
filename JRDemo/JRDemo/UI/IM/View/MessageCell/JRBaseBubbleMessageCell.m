@@ -8,13 +8,6 @@
 
 #import "JRBaseBubbleMessageCell.h"
 
-@interface JRBaseBubbleMessageCell ()
-
-@property (nonatomic, weak) id <JRMessageCellDelegate> delegate;
-@property (nonatomic, weak) UITableView *wTableView;
-
-@end
-
 @implementation JRBaseBubbleMessageCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -79,6 +72,7 @@
     if (!_msgContentView) {
         _msgContentView = [[UIView alloc] init];
         [_msgContentView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapContent)]];
+        [_msgContentView addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(setupNormalMenuController:)]];
         _msgContentView.userInteractionEnabled = YES;
         [_bubbleView addSubview:_msgContentView];
     }
@@ -104,6 +98,60 @@
     self.bubbleView.frame = self.layout.bubbleViewFrame;
     self.bubbleView.backgroundColor = self.layout.bubbleViewBackgroupColor;
     self.msgContentView.frame = self.layout.contentViewFrame;
+}
+
+- (void)setupNormalMenuController:(UILongPressGestureRecognizer *)longPressGestureRecognizer
+{
+    if (longPressGestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        [super becomeFirstResponder];
+        CGRect selectedCellMessageBubbleFrame = [self convertRect:self.bubbleView.frame toView:self.bubbleView];
+        UIMenuController *menu = [UIMenuController sharedMenuController];
+        UIMenuItem *revoke = [[UIMenuItem alloc] initWithTitle:@"撤回" action:@selector(revoke:)];
+        if (self.layout.message.state == JRMessageItemStateSendOK || self.layout.message.state == JRMessageItemStateDelivered || self.layout.message.state == JRMessageItemStateRead) {
+            [menu setMenuItems:@[revoke]];
+        }
+        [menu setTargetRect:selectedCellMessageBubbleFrame inView:self.bubbleView];
+        [menu setMenuVisible:YES animated:YES];
+    }
+}
+
+#pragma mark - Menu
+
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
+
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender
+{
+    if (self.layout.message.type == JRMessageItemTypeText) {
+        if (self.layout.message.state == JRMessageItemStateSendOK || self.layout.message.state == JRMessageItemStateDelivered || self.layout.message.state == JRMessageItemStateRead) {
+            return action == @selector(copy:) || action == @selector(revoke:);
+        } else if (self.layout.message.state == JRMessageItemStateReceiveOK) {
+            return action == @selector(copy:);
+        }
+    } else if (self.layout.message.type == JRMessageItemTypeGeo) {
+        if (self.layout.message.state == JRMessageItemStateSendOK || self.layout.message.state == JRMessageItemStateDelivered || self.layout.message.state == JRMessageItemStateRead) {
+            return action == @selector(revoke:);
+        }
+    } else {
+        if (self.layout.message.state == JRMessageItemStateSendOK || self.layout.message.state == JRMessageItemStateDelivered || self.layout.message.state == JRMessageItemStateRead) {
+            return action == @selector(revoke:);
+        }
+    }
+    return NO;
+}
+
+- (void)copy:(id)sender
+{
+    [[UIPasteboard generalPasteboard] setString:self.layout.message.content];
+}
+
+- (void)revoke:(id)sender
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(tableView:revokeMessage:)]) {
+        [self.delegate tableView:self.wTableView revokeMessage:self.layout.message];
+    }
 }
 
 #pragma mark - Tap Delegate

@@ -48,6 +48,12 @@
             pre = [NSString stringWithFormat:@"%@:", message.senderNumber];
         }
     }
+    if (message.state == JRMessageItemStateRevoked) {
+        return [NSString stringWithFormat:@"%@ %@", pre, @"撤回一条消息"];
+    }
+    if (message.isAtMsg) {
+        return [NSString stringWithFormat:@"%@ %@", pre, @"@了你"];
+    }
     switch (message.type) {
         case JRMessageItemTypeUnknow:
             return [NSString stringWithFormat:@"%@%@", pre, NSLocalizedString(@"MESSAGE_UNKNOW", nil)];
@@ -62,7 +68,11 @@
         case JRMessageItemTypeVideo:
             return [NSString stringWithFormat:@"%@%@", pre, NSLocalizedString(@"MESSAGE_VIDEO", nil)];
         case JRMessageItemTypeText:
-            return [NSString stringWithFormat:@"%@%@", pre, message.content];
+            if (message.contentType == JRTextMessageContentTypeDefault) {
+                return [NSString stringWithFormat:@"%@%@", pre, message.content];
+            } else {
+                return [NSString stringWithFormat:@"%@%@", pre, @"名片交换"];
+            }
         case JRMessageItemTypeNotify:
             return message.content;
         case JRMessageItemTypeOtherFile:

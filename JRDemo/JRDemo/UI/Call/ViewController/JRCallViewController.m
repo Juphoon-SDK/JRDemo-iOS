@@ -14,6 +14,7 @@
 #import "JRClientManager.h"
 #import "JRNumberUtil.h"
 #import "JRMultiVideoCollectionViewCell.h"
+#import "JRAutoConfigManager.h"
 
 #define MemberCell @"JRCallMemberCell"
 #define MultiVideoCell @"JRMultiVideoCell"
@@ -364,7 +365,11 @@ static void vibrate()
 
 - (IBAction)audioAnswer:(id)sender {
     if ([JRCall sharedInstance].currentCall.type == JRCallTypeMultiVideo) {
-        [[JRCall sharedInstance] answer:YES token:[JRClientManager sharedInstance].multiVideoToken];
+        [[JRAutoConfigManager sharedInstance] requestAccessTokenFinishBlock:^(NSString *token) {
+            if (token.length) {
+                [[JRCall sharedInstance] answer:YES token:token];
+            }
+        }];
     } else {
         [[JRCall sharedInstance] answer:NO token:nil];
     }
@@ -375,7 +380,7 @@ static void vibrate()
 }
 
 - (IBAction)end:(id)sender {
-    [[JRCall sharedInstance] end:JRCallTermReasonDecline];
+    [[JRCall sharedInstance] end];
 }
 
 - (IBAction)mute:(id)sender {

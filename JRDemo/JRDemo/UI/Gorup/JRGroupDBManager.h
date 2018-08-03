@@ -20,6 +20,8 @@
 
 + (JRGroupMemberObject *)getGroupMemberWithIdentity:(NSString *)identity number:(NSString *)number;
 
++ (JRGroupMemberObject *)getGroupMemberWithIdentity:(NSString *)identity displayName:(NSString *)displayName;
+
 + (RLMResults<JRGroupObject *> *)getGroupsWithState:(JRGroupStatus)state;
 
 @end

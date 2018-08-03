@@ -14,9 +14,15 @@
 #import "JRGroupManager.h"
 #import "JRAutoConfigManager.h"
 
+// 和飞信域
 #define UC_TOKEN_APPID  @""
 #define UC_TOKEN_APPKEY @""
 #define LICENSE_APPKEY @""
+
+// juphoon域
+//#define LICENSE_APPKEY @""
+//#define UC_TOKEN_APPID  @""
+//#define UC_TOKEN_APPKEY @""
 
 @interface AppDelegate ()
 

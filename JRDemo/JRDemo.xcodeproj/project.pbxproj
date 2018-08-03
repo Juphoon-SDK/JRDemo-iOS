@@ -30,7 +30,13 @@
 		5247F3D920883E2C00A24CA5 /* JRGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5247F3D720883E2C00A24CA5 /* JRGroupCell.xib */; };
 		5247F3DD20883ED700A24CA5 /* avatar_group@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5247F3DB20883ED700A24CA5 /* avatar_group@2x.png */; };
 		5247F3DE20883ED700A24CA5 /* avatar_group@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5247F3DC20883ED700A24CA5 /* avatar_group@3x.png */; };
-		52874E7120CF9D46009E5ACB /* JRSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52874E7020CF9D45009E5ACB /* JRSDK.framework */; };
+		525CF9D72105A69C0099F6B0 /* JRMessageSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 525CF9D62105A69C0099F6B0 /* JRMessageSettingsViewController.m */; };
+		525CF9DA2105B4780099F6B0 /* JRAtMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 525CF9D92105B4780099F6B0 /* JRAtMemberViewController.m */; };
+		525EB83220F74E17007538F4 /* Sound.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 525EB83120F74E17007538F4 /* Sound.bundle */; };
+		5272302F21145F2D00667840 /* JRSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5272302E21145F2D00667840 /* JRSDK.framework */; };
+		527E681F20E4E57B002A17CE /* JRLoadIconViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 527E681D20E4E57B002A17CE /* JRLoadIconViewController.m */; };
+		527E682020E4E57B002A17CE /* JRLoadIconViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 527E681E20E4E57B002A17CE /* JRLoadIconViewController.xib */; };
+		527E682220E4EA52002A17CE /* defaultIcon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 527E682120E4EA51002A17CE /* defaultIcon.jpg */; };
 		529058F5208F2A3400FB15B2 /* JRRecentCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 529058F4208F2A3400FB15B2 /* JRRecentCallViewController.m */; };
 		529058F8208F2F2100FB15B2 /* JRCallDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 529058F7208F2F2100FB15B2 /* JRCallDBManager.m */; };
 		529058FD208F5E3900FB15B2 /* recents-voice-incoming@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 529058F9208F5E3800FB15B2 /* recents-voice-incoming@2x.png */; };
@@ -55,6 +61,8 @@
 		5295CBCF1FCEB0EB007264D2 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5295CBC01FCEB03B007264D2 /* CoreMotion.framework */; };
 		5295CBD11FCEB111007264D2 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5295CBD01FCEB111007264D2 /* libstdc++.6.0.9.tbd */; };
 		5295CBD31FCEB126007264D2 /* libz.1.2.8.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5295CBD21FCEB125007264D2 /* libz.1.2.8.tbd */; };
+		5296D0EA20E211C8007929B4 /* JRCapacityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5296D0E820E211C8007929B4 /* JRCapacityViewController.m */; };
+		5296D0EB20E211C8007929B4 /* JRCapacityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5296D0E920E211C8007929B4 /* JRCapacityViewController.xib */; };
 		529731F520A2FBA500110AFE /* JRGroupNotifyLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 529731F420A2FBA500110AFE /* JRGroupNotifyLayout.m */; };
 		529731F820A2FC7100110AFE /* JRGroupNotifyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 529731F720A2FC7100110AFE /* JRGroupNotifyCell.m */; };
 		52A2522B208C67ED00ABA3AA /* JRGroupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A2522A208C67ED00ABA3AA /* JRGroupManager.m */; };
@@ -63,6 +71,15 @@
 		52A25232208CD46D00ABA3AA /* btn_group@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52A25231208CD46D00ABA3AA /* btn_group@3x.png */; };
 		52B67F942058FEF0004298DA /* JRAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B67F922058FEF0004298DA /* JRAboutViewController.m */; };
 		52B67F952058FEF0004298DA /* JRAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52B67F932058FEF0004298DA /* JRAboutViewController.xib */; };
+		52BBAE6B2106D4510048ACD4 /* JRExVCardLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BBAE6A2106D4510048ACD4 /* JRExVCardLayout.m */; };
+		52BBAE6E2106D48A0048ACD4 /* JRExVCardMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BBAE6D2106D48A0048ACD4 /* JRExVCardMessageCell.m */; };
+		52E42DAF20CE4EA80002A01B /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52E42DAE20CE4EA80002A01B /* ReplayKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		52E69A88210181A50012D928 /* JRRevokeMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E69A87210181A50012D928 /* JRRevokeMessageCell.m */; };
+		52E69A8B210181BB0012D928 /* JRRevokeLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E69A8A210181BB0012D928 /* JRRevokeLayout.m */; };
+		52E69A942101E5FF0012D928 /* im_dispok@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52E69A902101E5FE0012D928 /* im_dispok@2x.png */; };
+		52E69A952101E5FF0012D928 /* im_dispok@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52E69A912101E5FE0012D928 /* im_dispok@3x.png */; };
+		52E69A962101E5FF0012D928 /* im_dli@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52E69A922101E5FF0012D928 /* im_dli@3x.png */; };
+		52E69A972101E5FF0012D928 /* im_dli@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52E69A932101E5FF0012D928 /* im_dli@2x.png */; };
 		52F0D52E20198853003BBE0F /* license.sign in Resources */ = {isa = PBXBuildFile; fileRef = 52F0D52D20198853003BBE0F /* license.sign */; };
 		52FA682B204FBA14009BF7C9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 52FA664C204FBA14009BF7C9 /* Localizable.strings */; };
 		52FA682C204FBA14009BF7C9 /* UIImage+Tint.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FA6655204FBA14009BF7C9 /* UIImage+Tint.m */; };
@@ -452,9 +469,18 @@
 		5247F3D720883E2C00A24CA5 /* JRGroupCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JRGroupCell.xib; sourceTree = "<group>"; };
 		5247F3DB20883ED700A24CA5 /* avatar_group@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "avatar_group@2x.png"; sourceTree = "<group>"; };
 		5247F3DC20883ED700A24CA5 /* avatar_group@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "avatar_group@3x.png"; sourceTree = "<group>"; };
+		525CF9D52105A69C0099F6B0 /* JRMessageSettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JRMessageSettingsViewController.h; sourceTree = "<group>"; };
+		525CF9D62105A69C0099F6B0 /* JRMessageSettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JRMessageSettingsViewController.m; sourceTree = "<group>"; };
+		525CF9D82105B4780099F6B0 /* JRAtMemberViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JRAtMemberViewController.h; sourceTree = "<group>"; };
+		525CF9D92105B4780099F6B0 /* JRAtMemberViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JRAtMemberViewController.m; sourceTree = "<group>"; };
+		525EB83120F74E17007538F4 /* Sound.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Sound.bundle; sourceTree = "<group>"; };
 		5265F862202C20AD0098F839 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		5265F863202C20AD0098F839 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		52874E7020CF9D45009E5ACB /* JRSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JRSDK.framework; path = ../SDK/JRSDK.framework; sourceTree = "<group>"; };
+		5272302E21145F2D00667840 /* JRSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JRSDK.framework; path = ../SDK/JRSDK.framework; sourceTree = "<group>"; };
+		527E681C20E4E57B002A17CE /* JRLoadIconViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JRLoadIconViewController.h; sourceTree = "<group>"; };
+		527E681D20E4E57B002A17CE /* JRLoadIconViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JRLoadIconViewController.m; sourceTree = "<group>"; };
+		527E681E20E4E57B002A17CE /* JRLoadIconViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JRLoadIconViewController.xib; sourceTree = "<group>"; };
+		527E682120E4EA51002A17CE /* defaultIcon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = defaultIcon.jpg; sourceTree = "<group>"; };
 		529058F3208F2A3400FB15B2 /* JRRecentCallViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JRRecentCallViewController.h; sourceTree = "<group>"; };
 		529058F4208F2A3400FB15B2 /* JRRecentCallViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JRRecentCallViewController.m; sourceTree = "<group>"; };
 		529058F6208F2F2100FB15B2 /* JRCallDBManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JRCallDBManager.h; sourceTree = "<group>"; };
@@ -487,6 +513,9 @@
 		5295CBC71FCEB08A007264D2 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		5295CBD01FCEB111007264D2 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		5295CBD21FCEB125007264D2 /* libz.1.2.8.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.8.tbd; path = usr/lib/libz.1.2.8.tbd; sourceTree = SDKROOT; };
+		5296D0E720E211C8007929B4 /* JRCapacityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JRCapacityViewController.h; sourceTree = "<group>"; };
+		5296D0E820E211C8007929B4 /* JRCapacityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JRCapacityViewController.m; sourceTree = "<group>"; };
+		5296D0E920E211C8007929B4 /* JRCapacityViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JRCapacityViewController.xib; sourceTree = "<group>"; };
 		529731F320A2FBA500110AFE /* JRGroupNotifyLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JRGroupNotifyLayout.h; sourceTree = "<group>"; };
 		529731F420A2FBA500110AFE /* JRGroupNotifyLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JRGroupNotifyLayout.m; sourceTree = "<group>"; };
 		529731F620A2FC7100110AFE /* JRGroupNotifyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JRGroupNotifyCell.h; sourceTree = "<group>"; };
@@ -501,6 +530,19 @@
 		52B67F912058FEF0004298DA /* JRAboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JRAboutViewController.h; sourceTree = "<group>"; };
 		52B67F922058FEF0004298DA /* JRAboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JRAboutViewController.m; sourceTree = "<group>"; };
 		52B67F932058FEF0004298DA /* JRAboutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JRAboutViewController.xib; sourceTree = "<group>"; };
+		52BBAE692106D4510048ACD4 /* JRExVCardLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JRExVCardLayout.h; sourceTree = "<group>"; };
+		52BBAE6A2106D4510048ACD4 /* JRExVCardLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JRExVCardLayout.m; sourceTree = "<group>"; };
+		52BBAE6C2106D48A0048ACD4 /* JRExVCardMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JRExVCardMessageCell.h; sourceTree = "<group>"; };
+		52BBAE6D2106D48A0048ACD4 /* JRExVCardMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JRExVCardMessageCell.m; sourceTree = "<group>"; };
+		52E42DAE20CE4EA80002A01B /* ReplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReplayKit.framework; path = System/Library/Frameworks/ReplayKit.framework; sourceTree = SDKROOT; };
+		52E69A86210181A50012D928 /* JRRevokeMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JRRevokeMessageCell.h; sourceTree = "<group>"; };
+		52E69A87210181A50012D928 /* JRRevokeMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JRRevokeMessageCell.m; sourceTree = "<group>"; };
+		52E69A89210181BB0012D928 /* JRRevokeLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JRRevokeLayout.h; sourceTree = "<group>"; };
+		52E69A8A210181BB0012D928 /* JRRevokeLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JRRevokeLayout.m; sourceTree = "<group>"; };
+		52E69A902101E5FE0012D928 /* im_dispok@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "im_dispok@2x.png"; sourceTree = "<group>"; };
+		52E69A912101E5FE0012D928 /* im_dispok@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "im_dispok@3x.png"; sourceTree = "<group>"; };
+		52E69A922101E5FF0012D928 /* im_dli@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "im_dli@3x.png"; sourceTree = "<group>"; };
+		52E69A932101E5FF0012D928 /* im_dli@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "im_dli@2x.png"; sourceTree = "<group>"; };
 		52F0D52D20198853003BBE0F /* license.sign */ = {isa = PBXFileReference; lastKnownFileType = text; name = license.sign; path = ../../SDK/license.sign; sourceTree = "<group>"; };
 		52FA664D204FBA14009BF7C9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		52FA664E204FBA14009BF7C9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -939,9 +981,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5272302F21145F2D00667840 /* JRSDK.framework in Frameworks */,
+				52E42DAF20CE4EA80002A01B /* ReplayKit.framework in Frameworks */,
 				52FA68A2204FBA15009BF7C9 /* Realm.framework in Frameworks */,
 				5295CBCF1FCEB0EB007264D2 /* CoreMotion.framework in Frameworks */,
-				52874E7120CF9D46009E5ACB /* JRSDK.framework in Frameworks */,
 				5295CBCE1FCEB0E6007264D2 /* GLKit.framework in Frameworks */,
 				5295CBCD1FCEB0E1007264D2 /* CFNetwork.framework in Frameworks */,
 				5295CBCC1FCEB0DA007264D2 /* SystemConfiguration.framework in Frameworks */,
@@ -972,8 +1015,8 @@
 		52195B1A2086EB44002FC0D2 /* viewController */ = {
 			isa = PBXGroup;
 			children = (
-				52195B1B2086EB44002FC0D2 /* JRAutoConfigViewController.m */,
 				52195B1C2086EB44002FC0D2 /* JRAutoConfigViewController.h */,
+				52195B1B2086EB44002FC0D2 /* JRAutoConfigViewController.m */,
 			);
 			path = viewController;
 			sourceTree = "<group>";
@@ -1044,6 +1087,17 @@
 			path = Image;
 			sourceTree = "<group>";
 		};
+		527E681B20E4E4E1002A17CE /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				527E682120E4EA51002A17CE /* defaultIcon.jpg */,
+				527E681C20E4E57B002A17CE /* JRLoadIconViewController.h */,
+				527E681D20E4E57B002A17CE /* JRLoadIconViewController.m */,
+				527E681E20E4E57B002A17CE /* JRLoadIconViewController.xib */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		5295CB7C1FCEACE2007264D2 = {
 			isa = PBXGroup;
 			children = (
@@ -1083,7 +1137,8 @@
 		5295CBBF1FCEB03B007264D2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				52874E7020CF9D45009E5ACB /* JRSDK.framework */,
+				5272302E21145F2D00667840 /* JRSDK.framework */,
+				52E42DAE20CE4EA80002A01B /* ReplayKit.framework */,
 				52A8F2B9202840B000AF5754 /* CoreVideo.framework */,
 				5295CBD21FCEB125007264D2 /* libz.1.2.8.tbd */,
 				5295CBD01FCEB111007264D2 /* libstdc++.6.0.9.tbd */,
@@ -1099,9 +1154,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5296D0E620E211AD007929B4 /* Capacity */ = {
+			isa = PBXGroup;
+			children = (
+				5296D0E720E211C8007929B4 /* JRCapacityViewController.h */,
+				5296D0E820E211C8007929B4 /* JRCapacityViewController.m */,
+				5296D0E920E211C8007929B4 /* JRCapacityViewController.xib */,
+			);
+			path = Capacity;
+			sourceTree = "<group>";
+		};
 		52FA664A204FBA14009BF7C9 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				527E681B20E4E4E1002A17CE /* Profile */,
+				5296D0E620E211AD007929B4 /* Capacity */,
 				5247F3C3208839FA00A24CA5 /* Gorup */,
 				52195B172086EB44002FC0D2 /* AutoConfig */,
 				52FA6815204FBA14009BF7C9 /* Account */,
@@ -1569,6 +1636,10 @@
 		52FA6755204FBA14009BF7C9 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				52E69A902101E5FE0012D928 /* im_dispok@2x.png */,
+				52E69A912101E5FE0012D928 /* im_dispok@3x.png */,
+				52E69A932101E5FF0012D928 /* im_dli@2x.png */,
+				52E69A922101E5FF0012D928 /* im_dli@3x.png */,
 				52FA6756204FBA14009BF7C9 /* ReceiverVoiceNodePlaying@2x.png */,
 				52FA6757204FBA14009BF7C9 /* textNor@3x.png */,
 				52FA6758204FBA14009BF7C9 /* im_sending@3x.png */,
@@ -1764,6 +1835,8 @@
 				52FA67DB204FBA14009BF7C9 /* JRMediaPlayViewController.h */,
 				52FA67D1204FBA14009BF7C9 /* JRMediaPlayViewController.m */,
 				52FA67D2204FBA14009BF7C9 /* JRMediaPlayViewController.xib */,
+				525CF9D82105B4780099F6B0 /* JRAtMemberViewController.h */,
+				525CF9D92105B4780099F6B0 /* JRAtMemberViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1814,6 +1887,10 @@
 				52FA67FB204FBA14009BF7C9 /* JRBaseBubbleLayout.m */,
 				52FA6805204FBA14009BF7C9 /* JRBaseBubbleMessageCell.h */,
 				52FA67FA204FBA14009BF7C9 /* JRBaseBubbleMessageCell.m */,
+				529731F620A2FC7100110AFE /* JRGroupNotifyCell.h */,
+				529731F720A2FC7100110AFE /* JRGroupNotifyCell.m */,
+				529731F320A2FBA500110AFE /* JRGroupNotifyLayout.h */,
+				529731F420A2FBA500110AFE /* JRGroupNotifyLayout.m */,
 				52FA6803204FBA14009BF7C9 /* JRLocationLayout.h */,
 				52FA67F3204FBA14009BF7C9 /* JRLocationLayout.m */,
 				52FA67FE204FBA14009BF7C9 /* JRLocationMessageCell.h */,
@@ -1822,6 +1899,10 @@
 				52FA67FF204FBA14009BF7C9 /* JROtherFileLayout.m */,
 				52FA6807204FBA14009BF7C9 /* JROtherFileMessageCell.h */,
 				52FA67F8204FBA14009BF7C9 /* JROtherFileMessageCell.m */,
+				52E69A86210181A50012D928 /* JRRevokeMessageCell.h */,
+				52E69A87210181A50012D928 /* JRRevokeMessageCell.m */,
+				52E69A89210181BB0012D928 /* JRRevokeLayout.h */,
+				52E69A8A210181BB0012D928 /* JRRevokeLayout.m */,
 				52FA6802204FBA14009BF7C9 /* JRTextLayout.h */,
 				52FA67F5204FBA14009BF7C9 /* JRTextLayout.m */,
 				52FA67F6204FBA14009BF7C9 /* JRTextMessageCell.h */,
@@ -1834,10 +1915,10 @@
 				52FA6808204FBA14009BF7C9 /* JRVCardLayout.m */,
 				52FA67F9204FBA14009BF7C9 /* JRVCardMessageCell.h */,
 				52FA6806204FBA14009BF7C9 /* JRVCardMessageCell.m */,
-				529731F320A2FBA500110AFE /* JRGroupNotifyLayout.h */,
-				529731F420A2FBA500110AFE /* JRGroupNotifyLayout.m */,
-				529731F620A2FC7100110AFE /* JRGroupNotifyCell.h */,
-				529731F720A2FC7100110AFE /* JRGroupNotifyCell.m */,
+				52BBAE692106D4510048ACD4 /* JRExVCardLayout.h */,
+				52BBAE6A2106D4510048ACD4 /* JRExVCardLayout.m */,
+				52BBAE6C2106D48A0048ACD4 /* JRExVCardMessageCell.h */,
+				52BBAE6D2106D48A0048ACD4 /* JRExVCardMessageCell.m */,
 			);
 			path = MessageCell;
 			sourceTree = "<group>";
@@ -1876,6 +1957,8 @@
 				52B67F912058FEF0004298DA /* JRAboutViewController.h */,
 				52B67F922058FEF0004298DA /* JRAboutViewController.m */,
 				52B67F932058FEF0004298DA /* JRAboutViewController.xib */,
+				525CF9D52105A69C0099F6B0 /* JRMessageSettingsViewController.h */,
+				525CF9D62105A69C0099F6B0 /* JRMessageSettingsViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1973,6 +2056,7 @@
 				52FA686A204FBA15009BF7C9 /* answer@2x.png in Resources */,
 				52FA6913204FBA15009BF7C9 /* message_location@2x.png in Resources */,
 				52FA68F4204FBA15009BF7C9 /* msg-location-place@2x.png in Resources */,
+				527E682220E4EA52002A17CE /* defaultIcon.jpg in Resources */,
 				52FA6849204FBA14009BF7C9 /* Keep calling selected@3x.png in Resources */,
 				52FA692F204FBA15009BF7C9 /* message_location.png in Resources */,
 				52FA68D4204FBA15009BF7C9 /* ic-audio-animation-left-3@2x.png in Resources */,
@@ -2009,6 +2093,7 @@
 				52FA6841204FBA14009BF7C9 /* voice call selected@2x.png in Resources */,
 				52FA685D204FBA14009BF7C9 /* dtmf-3.png in Resources */,
 				52A25232208CD46D00ABA3AA /* btn_group@3x.png in Resources */,
+				52E69A972101E5FF0012D928 /* im_dli@2x.png in Resources */,
 				52FA6877204FBA15009BF7C9 /* Multiparty calls selected@2x.png in Resources */,
 				52FA6904204FBA15009BF7C9 /* message-details-message@3x.png in Resources */,
 				52FA6863204FBA14009BF7C9 /* dtmf-star.png in Resources */,
@@ -2059,6 +2144,7 @@
 				52FA6932204FBA15009BF7C9 /* message_send.png in Resources */,
 				52FA6900204FBA15009BF7C9 /* message_emoj@3x.png in Resources */,
 				52FA68E7204FBA15009BF7C9 /* ReceiverVoiceNodePlaying001@2x.png in Resources */,
+				527E682020E4E57B002A17CE /* JRLoadIconViewController.xib in Resources */,
 				52FA6890204FBA15009BF7C9 /* mute@2x.png in Resources */,
 				52FA6910204FBA15009BF7C9 /* message_delete@3x.png in Resources */,
 				52FA6862204FBA14009BF7C9 /* dtmf-8.png in Resources */,
@@ -2079,6 +2165,7 @@
 				52A25230208CD46600ABA3AA /* btn_group@2x..png in Resources */,
 				52FA685E204FBA14009BF7C9 /* dtmf-1.png in Resources */,
 				52FA68B0204FBA15009BF7C9 /* MJRefresh.bundle in Resources */,
+				52E69A942101E5FF0012D928 /* im_dispok@2x.png in Resources */,
 				52FA6865204FBA15009BF7C9 /* dtmf-4@2x.png in Resources */,
 				52FA6924204FBA15009BF7C9 /* message_map@2x.png in Resources */,
 				52FA688E204FBA15009BF7C9 /* video answer selected@2x.png in Resources */,
@@ -2146,6 +2233,7 @@
 				52FA689A204FBA15009BF7C9 /* JRCallMemberCell.xib in Resources */,
 				52FA694C204FBA15009BF7C9 /* img_pinkgirl_nor@3x.png in Resources */,
 				529058FD208F5E3900FB15B2 /* recents-voice-incoming@2x.png in Resources */,
+				5296D0EB20E211C8007929B4 /* JRCapacityViewController.xib in Resources */,
 				52FA694F204FBA15009BF7C9 /* img_blueman_nor.png in Resources */,
 				52FA68E1204FBA15009BF7C9 /* im_sending@3x.png in Resources */,
 				52FA68D0204FBA15009BF7C9 /* ic-audio-animation-right-1@2x.png in Resources */,
@@ -2156,6 +2244,7 @@
 				52FA6914204FBA15009BF7C9 /* message-details-message@2x.png in Resources */,
 				52FA687A204FBA15009BF7C9 /* reverse camera selected@2x.png in Resources */,
 				52FA685B204FBA14009BF7C9 /* dtmf-7@2x.png in Resources */,
+				52E69A952101E5FF0012D928 /* im_dispok@3x.png in Resources */,
 				52FA6880204FBA15009BF7C9 /* video selected@3x.png in Resources */,
 				52FA687C204FBA15009BF7C9 /* decline selected@2x.png in Resources */,
 				52FA692A204FBA15009BF7C9 /* message_details_voicecall.png in Resources */,
@@ -2173,6 +2262,7 @@
 				52FA6944204FBA15009BF7C9 /* ReceiverVoiceNodePlaying000@2x.png in Resources */,
 				52FA6856204FBA14009BF7C9 /* dtmf-7.png in Resources */,
 				52FA6881204FBA15009BF7C9 /* sound selected@2x.png in Resources */,
+				52E69A962101E5FF0012D928 /* im_dli@3x.png in Resources */,
 				52FA6923204FBA15009BF7C9 /* message_voice@2x.png in Resources */,
 				52FA68F9204FBA15009BF7C9 /* btn_smile_pre@2x..png in Resources */,
 				52FA682F204FBA14009BF7C9 /* JREditCell.xib in Resources */,
@@ -2233,8 +2323,12 @@
 				52FA6838204FBA14009BF7C9 /* JRSettings.m in Sources */,
 				5247F3CC20883CE400A24CA5 /* JRGroupMemberObject.m in Sources */,
 				52FA6830204FBA14009BF7C9 /* SVRadialGradientLayer.m in Sources */,
+				52E69A8B210181BB0012D928 /* JRRevokeLayout.m in Sources */,
 				52FA682C204FBA14009BF7C9 /* UIImage+Tint.m in Sources */,
+				52E69A88210181A50012D928 /* JRRevokeMessageCell.m in Sources */,
 				52FA68BF204FBA15009BF7C9 /* MJRefreshBackFooter.m in Sources */,
+				527E681F20E4E57B002A17CE /* JRLoadIconViewController.m in Sources */,
+				525CF9D72105A69C0099F6B0 /* JRMessageSettingsViewController.m in Sources */,
 				52FA68C2204FBA15009BF7C9 /* AJPhotoListCell.m in Sources */,
 				52FA697D204FBA15009BF7C9 /* JRVideoSettingsViewController.m in Sources */,
 				52FA695D204FBA15009BF7C9 /* JRMessageDBHelper.m in Sources */,
@@ -2242,12 +2336,14 @@
 				52FA696E204FBA15009BF7C9 /* JRVCardLayout.m in Sources */,
 				52FA68BB204FBA15009BF7C9 /* MJRefreshStateHeader.m in Sources */,
 				52FA68AC204FBA15009BF7C9 /* HBEmojiPageView.m in Sources */,
+				525CF9DA2105B4780099F6B0 /* JRAtMemberViewController.m in Sources */,
 				52FA68A1204FBA15009BF7C9 /* JRRealmWrapper.m in Sources */,
 				52FA6972204FBA15009BF7C9 /* JRConversationCell.m in Sources */,
 				52FA68B6204FBA15009BF7C9 /* MJRefreshBackNormalFooter.m in Sources */,
 				52FA68A3204FBA15009BF7C9 /* JRMessageObject.m in Sources */,
 				52FA695A204FBA15009BF7C9 /* JRDisplayLocationViewController.m in Sources */,
 				52B67F942058FEF0004298DA /* JRAboutViewController.m in Sources */,
+				52BBAE6E2106D48A0048ACD4 /* JRExVCardMessageCell.m in Sources */,
 				5295CB8D1FCEACE2007264D2 /* ViewController.m in Sources */,
 				52FA68C3204FBA15009BF7C9 /* JPhotoListView.m in Sources */,
 				52FA689D204FBA15009BF7C9 /* JRCallViewController.m in Sources */,
@@ -2269,6 +2365,7 @@
 				522D61432090141F00D7FF6E /* JRMultiVideoCell.m in Sources */,
 				52FA697E204FBA15009BF7C9 /* JRAudioSettingsViewController.m in Sources */,
 				52FA68B8204FBA15009BF7C9 /* MJRefreshAutoGifFooter.m in Sources */,
+				5296D0EA20E211C8007929B4 /* JRCapacityViewController.m in Sources */,
 				52FA6956204FBA15009BF7C9 /* JRAnnotation.m in Sources */,
 				52FA6969204FBA15009BF7C9 /* JRAudioLayout.m in Sources */,
 				5295CB8A1FCEACE2007264D2 /* AppDelegate.m in Sources */,
@@ -2310,6 +2407,7 @@
 				52FA6970204FBA15009BF7C9 /* JRLocationMessageCell.m in Sources */,
 				52FA6895204FBA15009BF7C9 /* JRCallManager.m in Sources */,
 				52177111208EC429009EF487 /* JRCallObject.m in Sources */,
+				52BBAE6B2106D4510048ACD4 /* JRExVCardLayout.m in Sources */,
 				52FA695C204FBA15009BF7C9 /* JRAudioPlayHelper.m in Sources */,
 				52FA696C204FBA15009BF7C9 /* JRAudioMessageCell.m in Sources */,
 				52FA68B9204FBA15009BF7C9 /* MJRefreshAutoNormalFooter.m in Sources */,
@@ -2489,7 +2587,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/JRDemo/DB",
 					"$(PROJECT_DIR)/JRDemo/UI/DB",
-					"$(PROJECT_DIR)/../SDK/",
+					"$(PROJECT_DIR)/../SDK",
 				);
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/JRDemo/PrefixHeader.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2525,6 +2623,7 @@
 					"-lmtcvoip",
 					"-lmtcmsg",
 					"-lssl",
+					"-lmtcprof",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.juphoon.JRDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2548,7 +2647,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/JRDemo/DB",
 					"$(PROJECT_DIR)/JRDemo/UI/DB",
-					"$(PROJECT_DIR)/../SDK/",
+					"$(PROJECT_DIR)/../SDK",
 				);
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/JRDemo/PrefixHeader.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "ZPLATFORM=ZPLATFORM_IOS";
@@ -2580,6 +2679,7 @@
 					"-lmtcvoip",
 					"-lmtcmsg",
 					"-lssl",
+					"-lmtcprof",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.juphoon.JRDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";

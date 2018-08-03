@@ -29,7 +29,6 @@
     }
     
     switch (message.state) {
-            // TO DO
         case JRMessageItemStateInit:
         case JRMessageItemStateSendInvite:
         case JRMessageItemStateSending:
@@ -47,7 +46,14 @@
         case JRMessageItemStateReceiving:
         case JRMessageItemStateReceiveFailed:
         case JRMessageItemStateReceivingPause:
+        case JRMessageItemStateRevoked:
             _stateViewImage = nil;
+            break;
+        case JRMessageItemStateDelivered:
+            _stateViewImage = [[UIImage imageNamed:@"im_dli"] imageWithColor:[UIColor colorWithRed:120.0/255.0 green:210.0/255.0 blue:110.0/255.0 alpha:1]];
+            break;
+        case JRMessageItemStateRead:
+            _stateViewImage = [[UIImage imageNamed:@"im_dispok"] imageWithColor:[UIColor colorWithRed:120.0/255.0 green:210.0/255.0 blue:110.0/255.0 alpha:1]];
             break;
     }
     
@@ -109,11 +115,16 @@
         case JRMessageItemTypeUnknow:
             break;
         case JRMessageItemTypeText: {
-            NSDictionary *attributes = @{
-                                         NSFontAttributeName : TextFont,
-                                         };
-            CGSize contetSize = [_message.content boundingRectWithSize:CGSizeMake(ContentLabelMaxWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil].size;
-            size = CGSizeMake(contetSize.width+2*BubbleViewMargin, contetSize.height+2*BubbleViewMargin);
+            if (self.message.contentType == JRTextMessageContentTypeDefault) {
+                NSDictionary *attributes = @{
+                                             NSFontAttributeName : TextFont,
+                                             };
+                CGSize contetSize = [_message.content boundingRectWithSize:CGSizeMake(ContentLabelMaxWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil].size;
+                size = CGSizeMake(contetSize.width+2*BubbleViewMargin, contetSize.height+2*BubbleViewMargin);
+            } else {
+                size = CGSizeMake(ExVCardSize.width+2*BubbleViewMargin, ExVCardSize.height+2*BubbleViewMargin);
+                break;
+            }
             break;
         }
         case JRMessageItemTypeVideo:
