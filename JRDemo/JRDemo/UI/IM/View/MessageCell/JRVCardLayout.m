@@ -18,13 +18,15 @@
 
 - (void)configWithMessage:(JRMessageObject *)message shouldShowTime:(BOOL)showTime shouldShowName:(BOOL)showName {
     [super configWithMessage:message shouldShowTime:showTime shouldShowName:showName];
-    
-    NSArray *contactArray = [JRFileUtil addressBookRecordsWithRelativePath:self.message.filePath error:nil];
-    if (contactArray.count > 0) {
-        ABRecordRef record = (__bridge_retained ABRecordRef)[contactArray objectAtIndex:0];
-        _vIconImage = [self ContactsGetPersonThumb:record];
-        _vName = [self ContactsGetPersonName:record];
-        _vNumber = [self ContactsGetPersonPhone:record];
+
+    if (self.message.filePath.length) {
+        NSArray *contactArray = [JRFileUtil addressBookRecordsWithRelativePath:self.message.filePath error:nil];
+        if (contactArray.count > 0) {
+            ABRecordRef record = (__bridge_retained ABRecordRef)[contactArray objectAtIndex:0];
+            _vIconImage = [self ContactsGetPersonThumb:record];
+            _vName = [self ContactsGetPersonName:record];
+            _vNumber = [self ContactsGetPersonPhone:record];
+        }
     }
     self.bubbleViewBackgroupColor = [UIColor whiteColor];
     _vIconFrame = CGRectMake(VCardSize.width/2 - VIconSize/2, VCardMargin, VIconSize, VIconSize);
