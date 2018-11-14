@@ -16,6 +16,8 @@
 - (void)tableView:(UITableView *)tableView tapMessageCellContent:(JRMessageObject *)message;
 - (void)tableView:(UITableView *)tableView tapMessageCellState:(JRMessageObject *)message;
 - (void)tableView:(UITableView *)tableView tapMessageCellAvator:(JRMessageObject *)message;
+- (void)tableView:(UITableView *)tableView revokeMessage:(JRMessageObject *)message;
+- (void)tableView:(UITableView *)tableView acceptExchangeVCard:(JRMessageObject *)message;
 
 @end
 
@@ -29,6 +31,10 @@
 @property (nonatomic, strong) UIImageView *stateView;
 
 @property (nonatomic, strong) UIView *msgContentView;
+
+// 方便继承，界面最好调用setDelegate:tableView:进行设置
+@property (nonatomic, weak) id <JRMessageCellDelegate> delegate;
+@property (nonatomic, weak) UITableView *wTableView;
 
 - (void)configWithLayout:(JRBaseBubbleLayout *)layout;
 

@@ -271,6 +271,13 @@
 
 - (void)textViewDidChange:(UITextView *)textView {
     [self layout];
+    if (textView.text.length) {
+        NSString *lastChar = [textView.text substringFromIndex:textView.text.length - 1];
+        
+        if ([lastChar isEqualToString:@"@"] && self.delegate && [self.delegate respondsToSelector:@selector(didAtMemberInGroupChat)]) {
+            [self.delegate didAtMemberInGroupChat];
+        }
+    }
 }
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
@@ -296,6 +303,15 @@
         return NO;
     }
     return YES;
+}
+
+- (void)addContent:(NSString *)content {
+    self.inputView.text = [self.inputView.text stringByAppendingString:content];
+    [self layout];
+}
+
+- (void)beginEditing {
+    [self.inputView becomeFirstResponder];
 }
 
 #pragma mark - XHBRecordButtonDelegate

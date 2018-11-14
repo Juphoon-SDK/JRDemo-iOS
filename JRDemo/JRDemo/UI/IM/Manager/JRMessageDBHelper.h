@@ -70,11 +70,15 @@
  */
 + (void)resetAllTransferingMessage;
 
+/**
+ 删除所有通知消息
+ */
 + (void)deleteAllNotifyMessage;
 
 /**
  JRMessageItem与JRMessageObject相互转换
  */
++ (JRTextMessageItem *)converTextMessage:(JRMessageObject *)obj;
 + (JRFileMessageItem *)converFileMessage:(JRMessageObject *)obj;
 + (JRGeoMessageItem *)converGeoMessage:(JRMessageObject *)obj;
 

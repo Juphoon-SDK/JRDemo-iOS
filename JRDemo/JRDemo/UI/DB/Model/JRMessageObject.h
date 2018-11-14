@@ -161,6 +161,37 @@
 @property JRMessageChannelType channelType;
 
 /**
+ 是否需要回已读
+ */
+@property BOOL imdnDipOk;
+
+/**
+ 群消息已读号码
+ */
+@property NSString *dipOkNumbers;
+
+/**
+ 是否需要回已送达
+ */
+@property BOOL imdnDeli;
+
+/**
+ 群消息已送达号码
+ */
+@property NSString *deliNumbers;
+
+
+/**
+ conversationId
+ */
+@property NSString *conversationId;
+
+/**
+ 文本消息拓展类型
+ */
+@property JRTextMessageContentType contentType;
+
+/**
  根据item初始化
 
  @param message item

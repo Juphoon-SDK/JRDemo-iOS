@@ -79,7 +79,7 @@ NSString * const kCallTermReasonKey = @"kCallTermReasonKey";
     }
     [_callViewController dismissViewControllerAnimated:YES completion:nil];
     _callViewController = nil;
-    if (reason == JRCallTermReasonForbidden || reason == JRCallTermReasonNotFound || reason == JRCallTermReasonNotAcpted || reason == JRCallTermReasonInternalErr || reason == JRCallTermReasonSrvUnavail || reason == JRCallTermReasonTempUnavail || reason == JRCallTermReasonOtherError) {
+    if ((reason == JRCallTermReasonForbidden || reason == JRCallTermReasonNotFound || reason == JRCallTermReasonNotAcpted || reason == JRCallTermReasonInternalErr || reason == JRCallTermReasonSrvUnavail || reason == JRCallTermReasonTempUnavail || reason == JRCallTermReasonOtherError) && item.direction == JRCallDirectionOut) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"呼叫失败" message:@"是否使用系统电话呼叫" preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             NSString *encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)item.callMembers.firstObject.number, NULL, (CFStringRef)@"()", kCFStringEncodingUTF8));

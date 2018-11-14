@@ -37,7 +37,7 @@
 
 #pragma mark - Send
 
-- (BOOL)sendTextMessage:(NSString *)message number:(NSString *)number {
+- (BOOL)sendTextMessage:(NSString *)message number:(NSString *)number contentType:(JRTextMessageContentType)contentType convId:(NSString *)convId {
     if ([JRClient sharedInstance].state != JRClientStateLogined) {
         return NO;
     }
@@ -45,17 +45,24 @@
         return NO;
     }
     JRTextMessageItem *item;
+    NSDictionary *dic;
     NSArray<NSString *> *numbers = [number componentsSeparatedByString:@","];
     if (numbers.count == 1) {
-        NSString *formatNumber = [JRNumberUtil numberWithChineseCountryCode:numbers.firstObject];
-        item = [[JRMessage sharedInstance] sendTextMessage:message chatType:JRMessageChannelType1On1 extraParams:formatNumber];
+        if (contentType == JRTextMessageContentTypeDefault) {
+            dic = [JRMessageExtraWrapper oneOnOneNormalText:[JRNumberUtil numberWithChineseCountryCode:numbers.firstObject]];
+        } else if (contentType == JRTextMessageContentTypeExchangeVCard) {
+            dic = [JRMessageExtraWrapper oneOnOneExchangeVCard:[JRNumberUtil numberWithChineseCountryCode:numbers.firstObject]];
+        } else if (contentType == JRTextMessageContentTypeAgreeExchangeVCard) {
+            dic = [JRMessageExtraWrapper oneOnOneAgreeExchangeVCard:[JRNumberUtil numberWithChineseCountryCode:numbers.firstObject] convId:convId];
+        }
+        item = [[JRMessage sharedInstance] sendTextMessage:message chatType:JRMessageChannelType1On1 extraParams:dic];
     } else if (numbers.count > 1) {
         NSMutableArray *array = [NSMutableArray arrayWithCapacity:numbers.count];
         for (NSString *number in numbers) {
             [array addObject:[JRNumberUtil numberWithChineseCountryCode:number]];
         }
-        item = [[JRMessage sharedInstance] sendTextMessage:message chatType:JRMessageChannelTypeList extraParams:array];
-        
+        dic = [JRMessageExtraWrapper listMessage:array];
+        item = [[JRMessage sharedInstance] sendTextMessage:message chatType:JRMessageChannelTypeList extraParams:dic];
     }
     if (item) {
         // 成功则插入
@@ -78,11 +85,16 @@
     return NO;
 }
 
-- (BOOL)sendTextMessage:(NSString *)message group:(JRGroupObject *)group {
+- (BOOL)sendTextMessage:(NSString *)message group:(JRGroupObject *)group members:(NSArray<JRGroupMemberObject *> *)atMembers atAll:(BOOL)atAll {
     if ([JRClient sharedInstance].state != JRClientStateLogined) {
         return NO;
     }
-    JRTextMessageItem *item = [[JRMessage sharedInstance] sendTextMessage:message chatType:JRMessageChannelTypeGroup extraParams:@{GROUP_CHAT_ID:group.chatId, SESSION_IDENTITY:group.identity, SUBJECT:group.name, GROUP_VERSION:[NSNumber numberWithInteger:group.groupVersion], GROUP_TYPE:[NSNumber numberWithInteger:group.type]}];
+    NSMutableArray *members = [NSMutableArray arrayWithCapacity:atMembers.count];
+    for (JRGroupMemberObject *member in atMembers) {
+        [members addObject:[JRNumberUtil numberWithChineseCountryCode:member.number]];
+    }
+    NSDictionary *dic = [JRMessageExtraWrapper groupNoramlText:group.identity groupId:group.chatId groupType:group.type groupVersion:group.groupVersion groupName:group.name atNumbers:members atAll:atAll];
+    JRTextMessageItem *item = [[JRMessage sharedInstance] sendTextMessage:message chatType:JRMessageChannelTypeGroup extraParams:dic];
     if (item) {
         // 成功则插入
         JRMessageObject *obj = [[JRMessageObject alloc] initWithTextMessage:item];
@@ -116,14 +128,15 @@
     JRFileMessageItem *item;
     NSArray<NSString *> *numbers = [number componentsSeparatedByString:@","];
     if (numbers.count == 1) {
-        NSString *formatNumber = [JRNumberUtil numberWithChineseCountryCode:number];
-        item = [[JRMessage sharedInstance] sendFileMessage:[JRFileUtil getAbsolutePathWithFileRelativePath:path] thumbPath:[JRFileUtil getAbsolutePathWithFileRelativePath:thumbPath] fileType:type chatType:JRMessageChannelType1On1 extraParams:formatNumber];
+        NSDictionary *dic = [JRMessageExtraWrapper oneOnOneFile:[JRNumberUtil numberWithChineseCountryCode:number]];
+        item = [[JRMessage sharedInstance] sendFileMessage:[JRFileUtil getAbsolutePathWithFileRelativePath:path] thumbPath:[JRFileUtil getAbsolutePathWithFileRelativePath:thumbPath] fileType:type chatType:JRMessageChannelType1On1 extraParams:dic];
     } else if (numbers.count > 1) {
         NSMutableArray *array = [NSMutableArray arrayWithCapacity:numbers.count];
         for (NSString *number in numbers) {
             [array addObject:[JRNumberUtil numberWithChineseCountryCode:number]];
         }
-        item = [[JRMessage sharedInstance] sendFileMessage:[JRFileUtil getAbsolutePathWithFileRelativePath:path] thumbPath:[JRFileUtil getAbsolutePathWithFileRelativePath:thumbPath] fileType:type chatType:JRMessageChannelTypeList extraParams:array];
+        NSDictionary *dic = [JRMessageExtraWrapper listMessage:array];
+        item = [[JRMessage sharedInstance] sendFileMessage:[JRFileUtil getAbsolutePathWithFileRelativePath:path] thumbPath:[JRFileUtil getAbsolutePathWithFileRelativePath:thumbPath] fileType:type chatType:JRMessageChannelTypeList extraParams:dic];
     }
     if (item) {
         JRMessageObject *obj = [[JRMessageObject alloc] initWithFileMessage:item];
@@ -149,7 +162,8 @@
     if ([JRClient sharedInstance].state != JRClientStateLogined) {
         return NO;
     }
-    JRFileMessageItem *item = [[JRMessage sharedInstance] sendFileMessage:[JRFileUtil getAbsolutePathWithFileRelativePath:path] thumbPath:[JRFileUtil getAbsolutePathWithFileRelativePath:thumbPath] fileType:type chatType:JRMessageChannelTypeGroup extraParams:@{GROUP_CHAT_ID:group.chatId, SESSION_IDENTITY:group.identity, SUBJECT:group.name, GROUP_VERSION:[NSNumber numberWithInteger:group.groupVersion], GROUP_TYPE:[NSNumber numberWithInteger:group.type]}];
+    NSDictionary *dic = [JRMessageExtraWrapper groupFile:group.identity groupId:group.chatId];
+    JRFileMessageItem *item = [[JRMessage sharedInstance] sendFileMessage:[JRFileUtil getAbsolutePathWithFileRelativePath:path] thumbPath:[JRFileUtil getAbsolutePathWithFileRelativePath:thumbPath] fileType:type chatType:JRMessageChannelTypeGroup extraParams:dic];
     if (item) {
         JRMessageObject *obj = [[JRMessageObject alloc] initWithFileMessage:item];
         RLMRealm *realm = [JRRealmWrapper getRealmInstance];
@@ -182,14 +196,15 @@
     JRGeoMessageItem *item;
     NSArray<NSString *> *numbers = [number componentsSeparatedByString:@","];
     if (numbers.count == 1) {
-        NSString *formatNumber = [JRNumberUtil numberWithChineseCountryCode:number];
-        item = [[JRMessage sharedInstance] sendGeoMessage:geoLabel latitude:latitude longitude:longitude radius:radius chatType:JRMessageChannelType1On1 extraParams:formatNumber];
+        NSDictionary *dic = [JRMessageExtraWrapper oneOnOneGeo:[JRNumberUtil numberWithChineseCountryCode:number]];
+        item = [[JRMessage sharedInstance] sendGeoMessage:geoLabel latitude:latitude longitude:longitude radius:radius chatType:JRMessageChannelType1On1 extraParams:dic];
     } else if (numbers.count > 1) {
         NSMutableArray *array = [NSMutableArray arrayWithCapacity:numbers.count];
         for (NSString *number in numbers) {
             [array addObject:[JRNumberUtil numberWithChineseCountryCode:number]];
         }
-        item = [[JRMessage sharedInstance] sendGeoMessage:geoLabel latitude:latitude longitude:longitude radius:radius chatType:JRMessageChannelTypeList extraParams:array];
+        NSDictionary *dic = [JRMessageExtraWrapper listMessage:array];
+        item = [[JRMessage sharedInstance] sendGeoMessage:geoLabel latitude:latitude longitude:longitude radius:radius chatType:JRMessageChannelTypeList extraParams:dic];
     }
 
     if (item) {
@@ -216,7 +231,8 @@
     if ([JRClient sharedInstance].state != JRClientStateLogined) {
         return NO;
     }
-    JRGeoMessageItem *item = [[JRMessage sharedInstance] sendGeoMessage:geoLabel latitude:latitude longitude:longitude radius:radius chatType:JRMessageChannelTypeGroup extraParams:@{GROUP_CHAT_ID:group.chatId, SESSION_IDENTITY:group.identity, SUBJECT:group.name, GROUP_VERSION:[NSNumber numberWithInteger:group.groupVersion], GROUP_TYPE:[NSNumber numberWithInteger:group.type]}];
+    NSDictionary *dic = [JRMessageExtraWrapper groupGeo:group.identity groupId:group.chatId];
+    JRGeoMessageItem *item = [[JRMessage sharedInstance] sendGeoMessage:geoLabel latitude:latitude longitude:longitude radius:radius chatType:JRMessageChannelTypeGroup extraParams:dic];
     if (item) {
         JRMessageObject *obj = [[JRMessageObject alloc] initWithGeoMessage:item];
         RLMRealm *realm = [JRRealmWrapper getRealmInstance];
@@ -264,9 +280,9 @@
         case JRMessageItemTypeText: {
             BOOL ret;
             if (message.groupChatId) {
-                ret = [self sendTextMessage:message.content group:[JRGroupDBManager getGroupWithIdentity:message.peerNumber]];
+                ret = [self sendTextMessage:message.content group:[JRGroupDBManager getGroupWithIdentity:message.peerNumber] members:nil atAll:NO];
             } else {
-                ret = [self sendTextMessage:message.content number:message.receiverNumber];
+                ret = [self sendTextMessage:message.content number:message.receiverNumber contentType:message.contentType convId:nil];
             }
             if (ret) {
                 if (realm) {
@@ -317,9 +333,33 @@
     }
 }
 
+- (BOOL)sendCommand:(JRMessageObject *)message command:(JRMessageCommandType)command group:(JRGroupObject *)group {
+    if ([JRClient sharedInstance].state != JRClientStateLogined) {
+        return NO;
+    }
+    NSDictionary *dic;
+    if (command == JRMessageCommandTypeRevoke && group) {
+        dic = [JRMessageExtraWrapper revokeMessage:group.identity groupId:group.chatId groupType:group.type groupVersion:group.groupVersion groupName:group.name];
+    }
+    if (message.type == JRMessageItemTypeText) {
+        JRTextMessageItem *text = [JRMessageDBHelper converTextMessage:message];
+        return [[JRMessage sharedInstance] sendCommand:text command:command extraParams:dic];
+    } else if (message.type == JRMessageItemTypeGeo) {
+        JRGeoMessageItem *geo = [JRMessageDBHelper converGeoMessage:message];
+        return [[JRMessage sharedInstance] sendCommand:geo command:command extraParams:dic];
+    } else {
+        JRFileMessageItem *file = [JRMessageDBHelper converFileMessage:message];
+        return [[JRMessage sharedInstance] sendCommand:file command:command extraParams:dic];
+    }
+}
+
 #pragma mark - Receive
 
 - (void)onTextMessageReceived:(JRTextMessageItem *)item {
+    // 发送回执
+    if (item.imdnDeli) {
+        [[JRMessage sharedInstance] sendCommand:item command:JRMessageCommandTypeDelivered extraParams:nil];
+    }
     JRMessageObject *message = [JRMessageDBHelper getMessageWithImdnId:item.messageImdnId];
     if (message) {
         // 已存在该消息
@@ -333,8 +373,13 @@
             formatNumber = item.sessIdentity;
             obj.isRead = [obj.peerNumber isEqualToString:self.currentNumber];
         } else {
-            formatNumber = [JRNumberUtil numberWithChineseCountryCode:item.senderNumber];
+            formatNumber = [JRNumberUtil numberWithChineseCountryCode:obj.peerNumber];
             obj.isRead = [JRNumberUtil isNumberEqual:obj.peerNumber secondNumber:self.currentNumber];
+        }
+        if (obj.isRead && obj.imdnDipOk) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[JRMessageManager shareInstance] sendCommand:obj command:JRMessageCommandTypeRead group:nil];
+            });
         }
         
         JRConversationObject *conversation = [JRMessageDBHelper getConversationWithNumber:formatNumber group:item.sessIdentity.length];
@@ -353,7 +398,7 @@
 
 - (void)onTextMessageUpdate:(JRTextMessageItem *)item {
     JRMessageObject *message = [JRMessageDBHelper getMessageWithImdnId:item.messageImdnId];
-    if (!message) {
+    if (!message || message.state == JRMessageItemStateRevoked) {
         // 消息不存在
         return;
     }
@@ -369,7 +414,11 @@
     }
 }
 
-- (void)onGeoMessageReceived:(JRGeoMessageItem *)item{
+- (void)onGeoMessageReceived:(JRGeoMessageItem *)item {
+    // 发送回执
+    if (item.imdnDeli) {
+        [[JRMessage sharedInstance] sendCommand:item command:JRMessageCommandTypeDelivered extraParams:nil];
+    }
     JRMessageObject *message = [JRMessageDBHelper getMessageWithTransferId:item.geoTransId];
     if (message) {
         // 已存在该消息
@@ -383,8 +432,13 @@
             formatNumber = item.sessIdentity;
             obj.isRead = [obj.peerNumber isEqualToString:self.currentNumber];
         } else {
-            formatNumber = [JRNumberUtil numberWithChineseCountryCode:item.senderNumber];
+            formatNumber = [JRNumberUtil numberWithChineseCountryCode:obj.peerNumber];
             obj.isRead = [JRNumberUtil isNumberEqual:obj.peerNumber secondNumber:self.currentNumber];
+        }
+        if (obj.isRead) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[JRMessageManager shareInstance] sendCommand:obj command:JRMessageCommandTypeRead group:nil];
+            });
         }
         JRConversationObject *conversation = [JRMessageDBHelper getConversationWithNumber:formatNumber group:item.sessIdentity.length];
         if (!conversation) {
@@ -404,7 +458,7 @@
 
 - (void)onGeoMessageUpdate:(JRGeoMessageItem *)item {
     JRMessageObject *message = [JRMessageDBHelper getMessageWithTransferId:item.geoTransId];
-    if (!message) {
+    if (!message || message.state == JRMessageItemStateRevoked) {
         // 消息不存在
         return;
     }
@@ -421,6 +475,10 @@
 }
 
 - (void)onFileMessageReceived:(JRFileMessageItem *)item {
+    // 发送回执
+    if (item.imdnDeli) {
+        [[JRMessage sharedInstance] sendCommand:item command:JRMessageCommandTypeDelivered extraParams:nil];
+    }
     JRMessageObject *message = [JRMessageDBHelper getMessageWithTransferId:item.fileTransId];
     if (message) {
         // 已存在该消息
@@ -433,8 +491,13 @@
         formatNumber = item.sessIdentity;
         obj.isRead = [obj.peerNumber isEqualToString:self.currentNumber];
     } else {
-        formatNumber = [JRNumberUtil numberWithChineseCountryCode:item.senderNumber];
+        formatNumber = [JRNumberUtil numberWithChineseCountryCode:obj.peerNumber];
         obj.isRead = [JRNumberUtil isNumberEqual:obj.peerNumber secondNumber:self.currentNumber];
+    }
+    if (obj.isRead) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[JRMessageManager shareInstance] sendCommand:obj command:JRMessageCommandTypeRead group:nil];
+        });
     }
     // 存缩略图
     if (item.fileThumbPath.length) {
@@ -469,7 +532,7 @@
 
 - (void)onFileMessageUpdate:(JRFileMessageItem *)item {
     JRMessageObject *message = [JRMessageDBHelper getMessageWithTransferId:item.fileTransId];
-    if (!message) {
+    if (!message || message.state == JRMessageItemStateRevoked) {
         // 消息不存在
         return;
     }
@@ -487,6 +550,12 @@
 }
 
 - (void)onOfflineMessageReceive:(NSArray<JRMessageItem *> *)items {
+    for (JRMessageItem *item in items) {
+        // 发送回执
+        if (item.imdnDeli) {
+            [[JRMessage sharedInstance] sendCommand:item command:JRMessageCommandTypeDelivered extraParams:nil];
+        }
+    }
     // 一次性插入
     NSMutableArray<JRMessageObject *> *messages = [NSMutableArray arrayWithCapacity:items.count];
     NSMutableArray<JRConversationObject *> *conversations = [[NSMutableArray alloc] init];
@@ -502,6 +571,11 @@
                 } else {
                     formatNumber = [JRNumberUtil numberWithChineseCountryCode:item.senderNumber];
                     obj.isRead = [JRNumberUtil isNumberEqual:obj.peerNumber secondNumber:self.currentNumber];
+                }
+                if (obj.isRead && obj.imdnDipOk) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [[JRMessageManager shareInstance] sendCommand:obj command:JRMessageCommandTypeRead group:nil];
+                    });
                 }
                 [messages addObject:obj];
                 JRConversationObject *conversation = [JRMessageDBHelper getConversationWithNumber:formatNumber group:item.sessIdentity.length];
@@ -520,6 +594,11 @@
                 } else {
                     formatNumber = [JRNumberUtil numberWithChineseCountryCode:item.senderNumber];
                     obj.isRead = [JRNumberUtil isNumberEqual:obj.peerNumber secondNumber:self.currentNumber];
+                }
+                if (obj.isRead && obj.imdnDipOk) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [[JRMessageManager shareInstance] sendCommand:obj command:JRMessageCommandTypeRead group:nil];
+                    });
                 }
                 // 存缩略图
                 if (((JRFileMessageItem *)item).fileThumbPath.length) {
@@ -546,6 +625,11 @@
                 } else {
                     formatNumber = [JRNumberUtil numberWithChineseCountryCode:item.senderNumber];
                     obj.isRead = [JRNumberUtil isNumberEqual:obj.peerNumber secondNumber:self.currentNumber];
+                }
+                if (obj.isRead && obj.imdnDipOk) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [[JRMessageManager shareInstance] sendCommand:obj command:JRMessageCommandTypeRead group:nil];
+                    });
                 }
                 [messages addObject:obj];
                 JRConversationObject *conversation = [JRMessageDBHelper getConversationWithNumber:formatNumber group:item.sessIdentity.length];
@@ -587,6 +671,46 @@
                 [[JRMessage sharedInstance] fetchGeoMessage:(JRGeoMessageItem *)item];
             }
         }
+    }
+}
+
+- (void)onCommandReceive:(NSString *)imdnId peerNumber:(NSString *)peerNumber command:(JRMessageCommandType)command {
+    RLMRealm *realm = [JRRealmWrapper getRealmInstance];
+    if (realm) {
+        JRMessageObject *obj = [JRMessageDBHelper getMessageWithImdnId:imdnId];
+        if (obj) {
+            [realm beginWriteTransaction];
+            if (command == JRMessageCommandTypeRevoke) {
+                obj.state = JRMessageItemStateRevoked;
+            } else if (command == JRMessageCommandTypeRead) {
+                obj.state = JRMessageItemStateRead;
+                if (obj.dipOkNumbers.length) {
+                    obj.dipOkNumbers = [NSString stringWithFormat:@"%@,%@", obj.dipOkNumbers, peerNumber];
+                } else {
+                    obj.dipOkNumbers = peerNumber;
+                }
+            } else if (command == JRMessageCommandTypeDelivered) {
+                obj.state = JRMessageItemStateDelivered;
+                if (obj.deliNumbers.length) {
+                    obj.deliNumbers = [NSString stringWithFormat:@"%@,%@", obj.deliNumbers, peerNumber];
+                } else {
+                    obj.deliNumbers = peerNumber;
+                }
+            }
+            [realm commitWriteTransaction];
+        }
+    }
+}
+
+- (void)onCommandSendResult:(BOOL)result command:(JRMessageCommandType)command imdnId:(NSString *)imdnId {
+    RLMRealm *realm = [JRRealmWrapper getRealmInstance];
+    if (realm) {
+        JRMessageObject *obj = [JRMessageDBHelper getMessageWithImdnId:imdnId];
+        [realm beginWriteTransaction];
+        if (command == JRMessageCommandTypeRevoke) {
+            obj.state = JRMessageItemStateRevoked;
+        }
+        [realm commitWriteTransaction];
     }
 }
 

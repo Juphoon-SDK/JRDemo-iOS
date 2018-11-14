@@ -42,6 +42,16 @@
     return nil;
 }
 
++ (JRGroupMemberObject *)getGroupMemberWithIdentity:(NSString *)identity displayName:(NSString *)displayName {
+    RLMRealm *realm = [JRRealmWrapper getRealmInstance];
+    if (realm) {
+        RLMResults<JRGroupMemberObject *> *results = [JRGroupMemberObject objectsInRealm:realm withPredicate:[NSPredicate predicateWithFormat:@"%K == %@ && %K == %@", @"groupIdentity", identity, @"displayName", displayName]];
+        if (results.count == 1) {
+            return results.firstObject;
+        }
+    }
+    return nil;
+}
 
 + (RLMResults<JRGroupObject *> *)getGroupsWithState:(JRGroupStatus)state {
     RLMRealm *realm = [JRRealmWrapper getRealmInstance];

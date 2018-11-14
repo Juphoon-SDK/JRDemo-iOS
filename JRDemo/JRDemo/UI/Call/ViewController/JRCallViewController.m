@@ -14,6 +14,7 @@
 #import "JRClientManager.h"
 #import "JRNumberUtil.h"
 #import "JRMultiVideoCollectionViewCell.h"
+#import "JRAutoConfigManager.h"
 
 #define MemberCell @"JRCallMemberCell"
 #define MultiVideoCell @"JRMultiVideoCell"
@@ -108,11 +109,14 @@ static void vibrate()
     [self.multiCallTableView registerNib:[UINib nibWithNibName:@"JRCallMemberCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:MemberCell];
     
     self.videoReqAlert = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"REQUEST_VIDEO", nil) preferredStyle:UIAlertControllerStyleAlert];
+    @weakify(self)
     [self.videoReqAlert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        @strongify(self)
         [[JRCall sharedInstance] answerUpdate:YES];
         self.videoAlertShow = NO;
     }]];
     [self.videoReqAlert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"CANCEL", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        @strongify(self)
         [[JRCall sharedInstance] answerUpdate:NO];
         self.videoAlertShow = NO;
     }]];
@@ -140,11 +144,6 @@ static void vibrate()
     [super viewDidAppear:animated];
     // 保证frame
     [self updateVideoView];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [self stopTimer];
 }
 
 - (void)dealloc {
@@ -286,7 +285,9 @@ static void vibrate()
         [self presentViewController:self.videoReqAlert animated:YES completion:nil];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             if (self.videoAlertShow) {
+                @weakify(self)
                 [self.videoReqAlert dismissViewControllerAnimated:YES completion:^{
+                    @strongify(self)
                     self.videoAlertShow = NO;
                     [SVProgressHUD showErrorWithStatus:@"长时间未响应，已自动拒绝转视频请求"];
                     [[JRCall sharedInstance] answerUpdate:NO];
@@ -356,6 +357,7 @@ static void vibrate()
             [self.canvsArray removeObject:canvas];
         }
     }
+    [self stopTimer];
     [self updateUI];
 }
 
@@ -363,7 +365,11 @@ static void vibrate()
 
 - (IBAction)audioAnswer:(id)sender {
     if ([JRCall sharedInstance].currentCall.type == JRCallTypeMultiVideo) {
-        [[JRCall sharedInstance] answer:YES token:[JRClientManager sharedInstance].multiVideoToken];
+        [[JRAutoConfigManager sharedInstance] requestAccessTokenFinishBlock:^(NSString *token) {
+            if (token.length) {
+                [[JRCall sharedInstance] answer:YES token:token];
+            }
+        }];
     } else {
         [[JRCall sharedInstance] answer:NO token:nil];
     }
@@ -374,7 +380,7 @@ static void vibrate()
 }
 
 - (IBAction)end:(id)sender {
-    [[JRCall sharedInstance] end:JRCallTermReasonDecline];
+    [[JRCall sharedInstance] end];
 }
 
 - (IBAction)mute:(id)sender {
@@ -655,6 +661,15 @@ static void vibrate()
         case JRCallMemberStatusPending:
             state = NSLocalizedString(@"PENDING", nil);
             break;
+        case JRCallMemberStatusInitial:
+            state = NSLocalizedString(@"CALL_INIT", nil);
+            break;
+        case JRCallMemberStatusConnecting:
+            state = NSLocalizedString(@"CALL_CONNECTING", nil);
+            break;
+        case JRCallMemberStatusRinging:
+            state = NSLocalizedString(@"RINGING", nil);
+            break;
         case JRCallMemberStatusDialingin:
             state = NSLocalizedString(@"INCOMING_CALL", nil);
             break;
@@ -670,13 +685,44 @@ static void vibrate()
         case JRCallMemberStatusOnhold:
             state = NSLocalizedString(@"HOLDING", nil);
             break;
+        case JRCallMemberStatusMuted:
+            state = NSLocalizedString(@"MUTED", nil);
+            break;
+        case JRCallMemberStatusUserNotAvailable:
+            state = NSLocalizedString(@"USER_NOT_AVAILABLE", nil);
+            break;
+        case JRCallMemberStatusNoAnswer:
+            state = NSLocalizedString(@"NO_ANSWER", nil);
+            break;
+        case JRCallMemberStatusBusy:
+            state = NSLocalizedString(@"BUSY", nil);
+            break;
+        case JRCallMemberStatusNotReachable:
+            state = NSLocalizedString(@"NOT_REACHABLE", nil);
+            break;
+        case JRCallMemberStatusRouteFailed:
+            state = NSLocalizedString(@"ROUTE_FAILED", nil);
+            break;
+        case JRCallMemberStatusUnavailable:
+            state = NSLocalizedString(@"UNAVAILABLE", nil);
+            break;
+        case JRCallMemberStatusGeneralFailure:
+        case JRCallMemberStatusUnknow:
+            state = NSLocalizedString(@"GENERAL_FAILURE", nil);
+            break;
+        case JRCallMemberStatusTimerExpired:
+            state = NSLocalizedString(@"TIMER_EXPIRED", nil);
+            break;
+        case JRCallMemberStatusDeleted:
+            state = NSLocalizedString(@"DELETED", nil);
+            break;
+        case JRCallMemberStatusForbidden:
+            state = NSLocalizedString(@"FORBIDDEN", nil);
+            break;
         case JRCallMemberStatusHangUp:
         case JRCallMemberStatusDiscing:
         case JRCallMemberStatusDisced:
             state = NSLocalizedString(@"DECLINED", nil);
-            break;
-        case JRCallMemberStatusMuted:
-            state = NSLocalizedString(@"MUTED", nil);
             break;
         default:
             state = nil;
@@ -720,6 +766,9 @@ static void vibrate()
 #warning 代码冗余严重，之后应将多方语音也改为Collection布局
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    if ([JRCall sharedInstance].currentCall.type != JRCallTypeMultiVideo) {
+        return 0;
+    }
     return [JRCall sharedInstance].currentCall.callMembers.count;
 }
 
@@ -730,6 +779,15 @@ static void vibrate()
     switch (member.status) {
         case JRCallMemberStatusPending:
             state = NSLocalizedString(@"PENDING", nil);
+            break;
+        case JRCallMemberStatusInitial:
+            state = NSLocalizedString(@"CALL_INIT", nil);
+            break;
+        case JRCallMemberStatusConnecting:
+            state = NSLocalizedString(@"CALL_CONNECTING", nil);
+            break;
+        case JRCallMemberStatusRinging:
+            state = NSLocalizedString(@"RINGING", nil);
             break;
         case JRCallMemberStatusDialingin:
             state = NSLocalizedString(@"INCOMING_CALL", nil);
@@ -746,13 +804,44 @@ static void vibrate()
         case JRCallMemberStatusOnhold:
             state = NSLocalizedString(@"HOLDING", nil);
             break;
+        case JRCallMemberStatusMuted:
+            state = NSLocalizedString(@"MUTED", nil);
+            break;
+        case JRCallMemberStatusUserNotAvailable:
+            state = NSLocalizedString(@"USER_NOT_AVAILABLE", nil);
+            break;
+        case JRCallMemberStatusNoAnswer:
+            state = NSLocalizedString(@"NO_ANSWER", nil);
+            break;
+        case JRCallMemberStatusBusy:
+            state = NSLocalizedString(@"BUSY", nil);
+            break;
+        case JRCallMemberStatusNotReachable:
+            state = NSLocalizedString(@"NOT_REACHABLE", nil);
+            break;
+        case JRCallMemberStatusRouteFailed:
+            state = NSLocalizedString(@"ROUTE_FAILED", nil);
+            break;
+        case JRCallMemberStatusUnavailable:
+            state = NSLocalizedString(@"UNAVAILABLE", nil);
+            break;
+        case JRCallMemberStatusGeneralFailure:
+        case JRCallMemberStatusUnknow:
+            state = NSLocalizedString(@"GENERAL_FAILURE", nil);
+            break;
+        case JRCallMemberStatusTimerExpired:
+            state = NSLocalizedString(@"TIMER_EXPIRED", nil);
+            break;
+        case JRCallMemberStatusDeleted:
+            state = NSLocalizedString(@"DELETED", nil);
+            break;
+        case JRCallMemberStatusForbidden:
+            state = NSLocalizedString(@"FORBIDDEN", nil);
+            break;
         case JRCallMemberStatusHangUp:
         case JRCallMemberStatusDiscing:
         case JRCallMemberStatusDisced:
             state = NSLocalizedString(@"DECLINED", nil);
-            break;
-        case JRCallMemberStatusMuted:
-            state = NSLocalizedString(@"MUTED", nil);
             break;
         default:
             state = nil;

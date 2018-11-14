@@ -29,7 +29,6 @@
     }
     
     switch (message.state) {
-            // TO DO
         case JRMessageItemStateInit:
         case JRMessageItemStateSendInvite:
         case JRMessageItemStateSending:
@@ -47,11 +46,18 @@
         case JRMessageItemStateReceiving:
         case JRMessageItemStateReceiveFailed:
         case JRMessageItemStateReceivingPause:
+        case JRMessageItemStateRevoked:
             _stateViewImage = nil;
+            break;
+        case JRMessageItemStateDelivered:
+            _stateViewImage = [[UIImage imageNamed:@"im_dli"] imageWithColor:[UIColor colorWithRed:120.0/255.0 green:210.0/255.0 blue:110.0/255.0 alpha:1]];
+            break;
+        case JRMessageItemStateRead:
+            _stateViewImage = [[UIImage imageNamed:@"im_dispok"] imageWithColor:[UIColor colorWithRed:120.0/255.0 green:210.0/255.0 blue:110.0/255.0 alpha:1]];
             break;
     }
     
-    _avatorViewImage = self.message.direction == JRMessageItemDirectionSend ? [UIImage imageNamed:@"img_blueman_nor"] : [UIImage imageNamed:@"img_greenman_nor"];
+    _avatorViewImage = self.message.direction == JRMessageItemDirectionSend || self.message.isCarbonCopy ? [UIImage imageNamed:@"img_blueman_nor"] : [UIImage imageNamed:@"img_greenman_nor"];
     if (self.message.groupChatId.length) {
         _nameLabelText = [JRGroupDBManager getGroupMemberWithIdentity:self.message.peerNumber number:self.message.senderNumber].displayName;
     }
@@ -67,7 +73,7 @@
     }
     
     CGSize bubbleSize = [self calculateBubbleViewSize];
-    if (self.message.direction == JRMessageItemDirectionSend) {
+    if (self.message.direction == JRMessageItemDirectionSend || self.message.isCarbonCopy) {
         _nameLabelTextAlignment = NSTextAlignmentRight;
         _avatorViewFrame = CGRectMake(CellWidth-(AvatorSize+Margin), avatorY+Margin, AvatorSize, AvatorSize);
         _bubbleViewFrame = CGRectMake(CellWidth-(CGRectGetWidth(_avatorViewFrame)+2*Margin)-bubbleSize.width, avatorY+Margin, bubbleSize.width, bubbleSize.height);
@@ -109,11 +115,16 @@
         case JRMessageItemTypeUnknow:
             break;
         case JRMessageItemTypeText: {
-            NSDictionary *attributes = @{
-                                         NSFontAttributeName : TextFont,
-                                         };
-            CGSize contetSize = [_message.content boundingRectWithSize:CGSizeMake(ContentLabelMaxWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil].size;
-            size = CGSizeMake(contetSize.width+2*BubbleViewMargin, contetSize.height+2*BubbleViewMargin);
+            if (self.message.contentType == JRTextMessageContentTypeDefault) {
+                NSDictionary *attributes = @{
+                                             NSFontAttributeName : TextFont,
+                                             };
+                CGSize contetSize = [_message.content boundingRectWithSize:CGSizeMake(ContentLabelMaxWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil].size;
+                size = CGSizeMake(contetSize.width+2*BubbleViewMargin, contetSize.height+2*BubbleViewMargin);
+            } else {
+                size = CGSizeMake(ExVCardSize.width+2*BubbleViewMargin, ExVCardSize.height+2*BubbleViewMargin);
+                break;
+            }
             break;
         }
         case JRMessageItemTypeVideo:

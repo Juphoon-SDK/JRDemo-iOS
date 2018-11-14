@@ -131,10 +131,21 @@
 "STUN_SERVER" = "STUN Server";
 "STUN_PORT" = "STUN Port";
 
+// message
+"MESSAGE_SETTING" = "Message Settings";
+"DELI_SUCC" = "Delivery Success";
+"DELI_FAIL" = "Delivery Fail";
+"DELI_FORWARD" = "Delivery Forward";
+"DISP" = "Display";
+
 "SAVE" = "Save";
 "NO_CODEC_DESCRIPTION" = "You have to choose at least one codec!";
+"NO_CODEC_TIP" = "Set Codec With Default";
 "OUT_OF_RANGE" = "Out of range!";
 "INVALIDID_STRING" = "Input the right value!";
+"BELOW_MINIMUM" = "Below Minimum";
+"ABOVE_MAXIMUM" = "Above Maximum";
+"INVALID_VALUE" = "Invalid Value";
 
 // 通用
 "UNKNOWN" = "unknown";
@@ -169,6 +180,19 @@
 "HELDING" = "Helding";
 "FORWARDING" = "Forwarding";
 "INCOMING_CALL" = "incoming";
+"CALL_INIT" = "Initial";
+"CALL_CONNECTING" = "Connecting";
+"USER_NOT_AVAILABLE" = "User Not Available";
+"NO_ANSWER" = "No Answer";
+"BUSY" = "Busy";
+"NOT_REACHABLE" = "Not Reachable";
+"ROUTE_FAILED" = "Route Failed";
+"UNAVAILABLE" = "Unavailable";
+"GENERAL_FAILURE" = "General Failure";
+"UNKNOW_ERROR" = "Unknow Error";
+"TIMER_EXPIRED" = "Timer Expired";
+"DELETED" = "Deleted";
+"FORBIDDEN" = "Forbidden";
 "ANSWER" = "answer";
 "ADD_CALL" = "Add Call";
 "HAVE_QUOTA" = "%ld Minute Be Left";
@@ -182,6 +206,9 @@
 "NO_QUOTA" = "Unable To Start Call, Check You Quota";
 "TO_AUDIO_FAILED" = "Unable To Turn Auido Or Request Has Been Denied";
 "TO_VIDEO_FAILED" = "Unable To Turn Video Or Request Has Been Denied";
+"CALL_FAIL" = "Call Failed";
+"USE_SYS_TEL" = "Use Syetem Phone?";
+"AUTO_REJECT_VIDEO" = "No Answer, Auto Reject";
 
 // 默认铃声
 "MUSIC_BOX" = "Music Box";
@@ -204,6 +231,10 @@
 // 通话记录
 "DELETE_ALL_CALLS" = "Delete All Calls";
 "MISS_CALL_COUNT" = "You have %d miss call";
+"ALL_CALL" = "Recent Calls";
+"MISS_CALL" = "Missed Calls";
+"REJECT_CALL" = "Reject";
+"CALL_SECOND" = "%d second";
 
 // 消息
 "MESSAGE" = "Chat";
@@ -244,8 +275,85 @@
 
 // 群
 "GROUP_LIST" = "Group List";
+"NEW_INVITE" = "New Invite";
 "SUB_GROUP_LIST_FAILED" = "Subscribe To Group List Failed";
 "GET_GROUPS_FAILED" = "No Data, Please Check Your Account State!";
 "GROUP_NOT_EXIST" = "Group Not Exist";
 "NEW_GROUP" = "New Group";
 "INPUT_GROUP_NAME" = "Input Group Name";
+"GENERAL_GROUP" = "General Group";
+"ENTERPRISE_GROUP" = "Enterprise Group";
+"PARTY_GROUP" = "Party Group";
+"UNKNOW_GROUP_TYPE" = "Unknow Group Type";
+"GROUP_NAME" = "Group Name";
+"MODIFY_GROUP_NAME" = "Modify Group Name";
+"GROUP_DISPLAYNAME" = "Group Displayname";
+"MODIFY_GROUP_DISPLAYNAME" = "Modify Group Displayname";
+"ALL_GROUP_MEMBER" = "All Group Members";
+"LEAVE_GROUP" = "Leave Group";
+"DISSOLVE_GROUP" = "Dissolve Group";
+"LEAVE_GROUP_TIP" = "Sure To Leave Group?";
+"DISSOLVE_GROUP_TIP" = "Sure To Dissolve Group?";
+"INVITE_NEW_MEMBER" = "Invite New Member";
+"TRANSFER_CHAIRMAN" = "Transfer Chairman";
+"KICK_OUT" = "Kick Out Member";
+"EXCHANGE_VCARD" = "Exchange VCard";
+"EXCHANGE_VCARD_CONTENT" = "I'm %@ in group chat %@，can I exchange Vcard with you?";
+"EXCHANGE_VCARD_SUCC" = "Request Sent";
+"CREATE_GROUP_SUCC" = "Create Group Successfully";
+"CREATE_GROUP_FAIL" = "Failed To Create Group";
+"LEAVE_GROUP_SUCC" = "Leave Group Successfully";
+"LEAVE_GROUP_FAIL" = "Failed To Leave Group";
+"MODIFY_GROUP_NAME_SUCC" = "Modify Group Name Successfully";
+"MODIFY_GROUP_NAME_FAIL" = "Failed To Modify Group Name";
+"MODIFY_GROUP_DISPLAYNAME_SUCC" = "Modify Displayname Successfully";
+"MODIFY_GROUP_DISPLAYNAME_FAIL" = "Failed To Modify Displayname";
+"DISSOLVE_GROUP_SUCC" = "Dissolve Group Successfully";
+"DISSOLVE_GROUP_FAIL" = "Failed To Dissolve Group";
+"INVITE_NEW_MEMBER_SUCC" = "Invite Member Successfully";
+"INVITE_NEW_MEMBER_FAIL" = "Failed To Invite Member";
+"KICK_OUT_SUCC" = "Kick Out Member Successfully";
+"KICK_OUT_FAIL" = "Failed To Kick Out Member";
+"TRANSFER_CHAIRMAN_SUCC" = "Transfer Chairman Successfully";
+"TRANSFER_CHAIRMAN_FAIL" = "Failed To Transfer Chairman";
+"GROUP_NAME_NOTIFY" = "Group Name Changed To %@";
+"GROUP_CHAIRMAN_NOTIFY" = "Chairman Changed To %@";
+"LEAVE_GROUP_NOTIFY" = "%@ Leave Group";
+"JOIN_GROUP_NOTIFY"  = "%@ Join Group";
+"CAN_NOT_REVOKE" = "Can Not Revoke Beyond Two Minutes";
+"AGREE_EXCHANGE_VCARD" = "My Phone Number is %@，I Agree Exchange Vcard With You";
+"REVOKE_A_MESSAGE" = "Revoke Message";
+"REVOKE_MESSGAE" = "Revoke";
+"BEEN_AT" = "@ you";
+"EXCHANGE_VCARD" = "[Exchange Vcard]";
+"MESSAGE_REVOKED" = "Message Been Revoked";
+"REVOKED" = "Message Been Revoked";
+"VCARD_NAME" = "Name";
+"VCARD_EMAIL" = "E-mail";
+"VCARD_COMPANY" = "Company";
+"VCARD_NUMBER" = "Number";
+"AGREE" = "Agree Exchanged VCard";
+"CONTENT_LARGE" = "Text Length Beyond The Limit";
+
+// Profile
+"DOWNLOAD_SUCC" = "Download Successful";
+"DOWNLOAD_FAIL" = "Download Failed";
+"UPLOAD_SUCC" = "Upload Successful";
+"UPLOAD_FAIL" = "Upload Failed";
+
+// Capacity
+"QUERY_FAIL" = "Query Failed";
+"ONLINE_RCS" = "%@ Is An Online RCS User";
+"OFFLINE_RCS" = "%@ Is An Offline RCS User";
+"NOT_RCS" = "%@ is Not RCS User";
+
+// 自动配置
+"CHOOSE_PORT" = "Choose Port";
+"COMMERCIAL_PORT" = "Commercial Port";
+"TEST_PORT" = "Test Port";
+"AUTO_CONFIG_SUCC" = "Auto Config Successful";
+"AUTO_CONFIG_FAIL" = "Auto Config Failed";
+"AUTO_CONFIGING" = "Waiting";
+
+// 初始化与登录
+"INIT_FAIL" = "Initialize Failed";

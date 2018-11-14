@@ -15,6 +15,8 @@
 #import "JRVCardLayout.h"
 #import "JROtherFileLayout.h"
 #import "JRGroupNotifyLayout.h"
+#import "JRRevokeLayout.h"
+#import "JRExVCardLayout.h"
 
 @interface JRMessageLayoutManager : NSObject
 

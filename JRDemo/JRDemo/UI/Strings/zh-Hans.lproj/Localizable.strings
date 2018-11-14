@@ -131,10 +131,21 @@
 "STUN_SERVER" = "STUN服务器地址";
 "STUN_PORT" = "STUN服务器端口";
 
+// message
+"MESSAGE_SETTING" = "消息设置";
+"DELI_SUCC" = "送达成功回执";
+"DELI_FAIL" = "送达失败回执";
+"DELI_FORWARD" = "消息转短回执";
+"DISP" = "已读回执";
+
 "SAVE" = "保存";
 "NO_CODEC_DESCRIPTION" = "你必须选择至少一种编解码!";
+"NO_CODEC_TIP" = "未选择编解码，将采用默认编解码";
 "OUT_OF_RANGE" = "超出可用范围!";
 "INVALIDID_STRING" = "请输入正确的值!";
+"BELOW_MINIMUM" = "低于最小值";
+"ABOVE_MAXIMUM" = "超出最大值";
+"INVALID_VALUE" = "不合法的值";
 
 // 通用
 "UNKNOWN" = "未知";
@@ -169,6 +180,19 @@
 "HELDING" = "被挂起";
 "FORWARDING" = "转移中";
 "INCOMING_CALL" = "来电";
+"CALL_INIT" = "初始";
+"CALL_CONNECTING" = "连接中";
+"USER_NOT_AVAILABLE" = "用户不可用";
+"NO_ANSWER" = "无应答";
+"BUSY" = "对方忙";
+"NOT_REACHABLE" = "用户不可达";
+"ROUTE_FAILED" = "路由失败";
+"UNAVAILABLE" = "不可用";
+"GENERAL_FAILURE" = "其他错误";
+"UNKNOW_ERROR" = "其他错误";
+"TIMER_EXPIRED" = "超时";
+"DELETED" = "主席删除";
+"FORBIDDEN" = "禁止呼叫";
 "ANSWER" = "接听";
 "ADD_CALL" = "添加通话";
 "HAVE_QUOTA" = "剩余%ld分钟";
@@ -182,6 +206,9 @@
 "NO_QUOTA" = "未查询到此次通话的能力";
 "TO_AUDIO_FAILED" = "转音频通话失败，对方拒绝或不具备音频通话能力";
 "TO_VIDEO_FAILED" = "转视频通话失败，对方拒绝或不具备视频通话能力";
+"CALL_FAIL" = "呼叫失败";
+"USE_SYS_TEL" = "是否使用系统电话呼叫？";
+"AUTO_REJECT_VIDEO" = "长时间未响应，已自动拒绝转视频请求";
 
 // 默认铃声
 "MUSIC_BOX" = "八音盒";
@@ -204,6 +231,10 @@
 // 通话记录
 "DELETE_ALL_CALLS" = "删除所有记录";
 "MISS_CALL_COUNT" = "您有%d个未接来电";
+"ALL_CALL" = "所有通话";
+"MISS_CALL" = "未接来电";
+"REJECT_CALL" = "拒接";
+"CALL_SECOND" = "%d秒";
 
 // 消息
 "MESSAGE" = "聊天";
@@ -236,6 +267,7 @@
 "MESSAGE_VCARD" = "[名片]";
 "MESSAGE_VIDEO" = "[视频]";
 "MESSAGE_FILE" = "[文件]";
+"MESSAGE_EXCHANGE_VCARD" = "[名片交换]";
 "OTHER_FILES" = "其他类型文件";
 "NO_OTHER_FILES" = "无其他类型文件";
 "NO_CONVERSATION" = "当前无聊天记录，点击右上角开始聊天";
@@ -244,8 +276,85 @@
 
 // 群
 "GROUP_LIST" = "群列表";
+"NEW_INVITE" = "新邀请";
 "SUB_GROUP_LIST_FAILED" = "订阅群列表失败";
 "GET_GROUPS_FAILED" = "获取群列表失败，请检查注册状态！";
 "GROUP_NOT_EXIST" = "您已退出群聊";
 "NEW_GROUP" = "新建群聊";
 "INPUT_GROUP_NAME" = "输入群名称";
+"GENERAL_GROUP" = "普通群";
+"ENTERPRISE_GROUP" = "企业群";
+"PARTY_GROUP" = "党群";
+"UNKNOW_GROUP_TYPE" = "未知群类型";
+"GROUP_NAME" = "群聊名称";
+"MODIFY_GROUP_NAME" = "修改群聊名称";
+"GROUP_DISPLAYNAME" = "群名片";
+"MODIFY_GROUP_DISPLAYNAME" = "修改群名片";
+"ALL_GROUP_MEMBER" = "所有群成员";
+"LEAVE_GROUP" = "离开群聊";
+"DISSOLVE_GROUP" = "解散群聊";
+"LEAVE_GROUP_TIP" = "是否退出群聊？";
+"DISSOLVE_GROUP_TIP" = "是否解散群聊？";
+"INVITE_NEW_MEMBER" = "邀请新成员";
+"TRANSFER_CHAIRMAN" = "转让群主";
+"KICK_OUT" = "踢出群聊";
+"EXCHANGE_VCARD" = "交换名片";
+"EXCHANGE_VCARD_CONTENT" = "我是群聊%@里的%@，希望可以和你交换名片";
+"EXCHANGE_VCARD_SUCC" = "交换请求已发送";
+"CREATE_GROUP_SUCC" = "创建群聊成功";
+"CREATE_GROUP_FAIL" = "创建群聊失败";
+"LEAVE_GROUP_SUCC" = "离开群聊成功";
+"LEAVE_GROUP_FAIL" = "离开群聊失败";
+"MODIFY_GROUP_NAME_SUCC" = "修改群名称成功";
+"MODIFY_GROUP_NAME_FAIL" = "修改群名称失败";
+"MODIFY_GROUP_DISPLAYNAME_SUCC" = "修改群昵称成功";
+"MODIFY_GROUP_DISPLAYNAME_FAIL" = "修改群昵称失败";
+"DISSOLVE_GROUP_SUCC" = "解散群聊成功";
+"DISSOLVE_GROUP_FAIL" = "解散群聊失败";
+"INVITE_NEW_MEMBER_SUCC" = "邀请成员成功";
+"INVITE_NEW_MEMBER_FAIL" = "邀请成员失败";
+"KICK_OUT_SUCC" = "踢出成员成功";
+"KICK_OUT_FAIL" = "踢出成员失败";
+"TRANSFER_CHAIRMAN_SUCC" = "转让群主成功";
+"TRANSFER_CHAIRMAN_FAIL" = "转让群主失败";
+"GROUP_NAME_NOTIFY" = "群名称修改为 %@";
+"GROUP_CHAIRMAN_NOTIFY" = "群主修改为 %@";
+"LEAVE_GROUP_NOTIFY" = "%@ 离开群聊";
+"JOIN_GROUP_NOTIFY"  = "%@ 加入群聊";
+"CAN_NOT_REVOKE" = "超出两分钟无法撤回";
+"AGREE_EXCHANGE_VCARD" = "我的号码是%@，我同意与你交换名片";
+"REVOKE_A_MESSAGE" = "撤回一条消息";
+"REVOKE_MESSGAE" = "撤回";
+"BEEN_AT" = "@了你";
+"EXCHANGE_VCARD" = "名片交换";
+"MESSAGE_REVOKED" = "消息已撤回";
+"REVOKED" = "对方已撤回";
+"VCARD_NAME" = "姓名";
+"VCARD_EMAIL" = "邮箱";
+"VCARD_COMPANY" = "公司";
+"VCARD_NUMBER" = "号码";
+"AGREE" = "同意交换";
+"CONTENT_LARGE" = "内容过长";
+
+// Profile
+"DOWNLOAD_SUCC" = "下载成功";
+"DOWNLOAD_FAIL" = "下载失败";
+"UPLOAD_SUCC" = "上传成功";
+"UPLOAD_FAIL" = "上传失败";
+
+// Capacity
+"QUERY_FAIL" = "查询失败";
+"ONLINE_RCS" = "%@ 是RCS用户，并且在线";
+"OFFLINE_RCS" = "%@ 是RCS用户，但是不在线";
+"NOT_RCS" = "%@ 非RCS用户";
+
+// 自动配置
+"CHOOSE_PORT" = "选择自动配置环境";
+"COMMERCIAL_PORT" = "商用局";
+"TEST_PORT" = "测试局";
+"AUTO_CONFIG_SUCC" = "自动配置成功";
+"AUTO_CONFIG_FAIL" = "自动配置失败";
+"AUTO_CONFIGING" = "自动配置中..";
+
+// 初始化与登录
+"INIT_FAIL" = "初始化失败";

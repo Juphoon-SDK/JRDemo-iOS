@@ -11,6 +11,8 @@
 #import "JRConversationsViewController.h"
 #import "JRAutoConfigViewController.h"
 #import "JRGroupsListViewController.h"
+#import "JRCapacityViewController.h"
+#import "JRLoadIconViewController.h"
 
 @interface ViewController ()
 
@@ -45,6 +47,16 @@
 
 - (IBAction)groupManager:(id)sender {
     JRGroupsListViewController *view = [[JRGroupsListViewController alloc] initWithStyle:UITableViewStylePlain];
+    [self.navigationController pushViewController:view animated:YES];
+}
+
+- (IBAction)queryCapacity:(id)sender {
+    JRCapacityViewController *view = [[JRCapacityViewController alloc] init];
+    [self.navigationController pushViewController:view animated:YES];
+}
+
+- (IBAction)icon:(id)sender {
+    JRLoadIconViewController *view = [[JRLoadIconViewController alloc] init];
     [self.navigationController pushViewController:view animated:YES];
 }
 

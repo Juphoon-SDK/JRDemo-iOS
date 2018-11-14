@@ -11,26 +11,6 @@
 
 @implementation JRTextMessageCell
 
-#pragma mark - Copying Method
-
-- (BOOL)canBecomeFirstResponder
-{
-    return YES;
-}
-
-- (BOOL)canPerformAction:(SEL)action withSender:(id)sender
-{
-    if (self.layout.message.type == JRMessageItemTypeText) {
-        return action == @selector(copy:);
-    }
-    return NO;
-}
-
-- (void)copy:(id)sender
-{
-    [[UIPasteboard generalPasteboard] setString:self.layout.message.content];
-}
-
 - (void)configWithLayout:(JRBaseBubbleLayout *)layout
 {
     [super configWithLayout:layout];
@@ -39,22 +19,9 @@
         _contentLabel.font = TextFont;
         _contentLabel.backgroundColor = [UIColor clearColor];
         _contentLabel.numberOfLines = 0;
-        _contentLabel.userInteractionEnabled = YES;
-        [_contentLabel addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(setupNormalMenuController:)]];
         [self.msgContentView addSubview:_contentLabel];
     }
     _contentLabel.text = ((JRTextLayout *)layout).contentLabelText;
-}
-
-- (void)setupNormalMenuController:(UILongPressGestureRecognizer *)longPressGestureRecognizer
-{
-    if (longPressGestureRecognizer.state == UIGestureRecognizerStateBegan) {
-        [super becomeFirstResponder];
-        CGRect selectedCellMessageBubbleFrame = [self convertRect:self.bubbleView.frame toView:self.bubbleView];
-        UIMenuController *menu = [UIMenuController sharedMenuController];
-        [menu setTargetRect:selectedCellMessageBubbleFrame inView:self.bubbleView];
-        [menu setMenuVisible:YES animated:YES];
-    }
 }
 
 - (void)layoutSubviews

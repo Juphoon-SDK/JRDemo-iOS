@@ -118,6 +118,8 @@
         self.mDataSource = @[@"176X144", @"240X160", @"312X208", @"320X240", @"352X288", @"480X320", @"640X480", @"704X576", @"1280X720"];
     } else if (self.key == JRAccountConfigKeyVideoKeyFramerateByInfo) {
         self.mDataSource = @[@"OFF", @"INFO", @"RTCP"];
+    } else if (self.key == JRAccountConfigKeyVideoFec) {
+        self.mDataSource = @[@"None", @"Red", @"Multi SSRC"];
     } else if (self.key == JRAccountConfigKeySrtpEncryptionType) {
         self.mDataSource = @[@"OFF", @"AES128-HMAC80", @"AES128-HMAC32"];
     } else if (self.key == JRAccountConfigKeyNatType) {

@@ -21,7 +21,7 @@
 + (RLMResults<JRCallObject *> *)getMissCalls {
     RLMRealm *realm = [JRRealmWrapper getRealmInstance];
     if (realm) {
-        return [[JRCallObject objectsInRealm:realm withPredicate:[NSPredicate predicateWithFormat:@"%K > %@", @"type", [NSNumber numberWithInt:JRCallStateOk]]] sortedResultsUsingKeyPath:@"beginTime" ascending:NO];;
+        return [[JRCallObject objectsInRealm:realm withPredicate:[NSPredicate predicateWithFormat:@"%K > %@", @"state", [NSNumber numberWithInt:JRCallStateOk]]] sortedResultsUsingKeyPath:@"beginTime" ascending:NO];;
     }
     return nil;
 }

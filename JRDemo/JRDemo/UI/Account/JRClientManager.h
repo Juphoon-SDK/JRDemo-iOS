@@ -16,8 +16,6 @@ extern NSString * const kClientReasonKey;
 
 @interface JRClientManager : NSObject
 
-@property (nonatomic, copy) NSString *multiVideoToken;
-
 + (JRClientManager *)sharedInstance;
 
 @end

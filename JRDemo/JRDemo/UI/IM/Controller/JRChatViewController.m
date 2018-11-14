@@ -28,7 +28,11 @@
 #import "JRVCardMessageCell.h"
 #import "JROtherFileMessageCell.h"
 #import "JRGroupNotifyCell.h"
+#import "JRRevokeMessageCell.h"
+#import "JRExVCardMessageCell.h"
 #import "JRGroupDetailViewController.h"
+#import "JRAtMemberViewController.h"
+#import "JRGroupDBManager.h"
 
 #import <AddressBookUI/AddressBookUI.h>
 
@@ -39,8 +43,10 @@
 #define LocationCell @"LocationCell"
 #define OtherFileCell @"OtherFileCell"
 #define NotifyCell @"NotifyCell"
+#define RevokeCell @"RevokeCell"
+#define ExchangeCell @"ExchangeCell"
 
-@interface JRChatViewController () <UITableViewDataSource, UITableViewDelegate, JRInputViewDelegate, ABPeoplePickerNavigationControllerDelegate, JRCameraHelperDelegate, JRAlbumViewControllerDelegate, JRFilesViewControllerDelegate, JRMessageCellDelegate>
+@interface JRChatViewController () <UITableViewDataSource, UITableViewDelegate, JRInputViewDelegate, ABPeoplePickerNavigationControllerDelegate, JRCameraHelperDelegate, JRAlbumViewControllerDelegate, JRFilesViewControllerDelegate, JRMessageCellDelegate, JRAtMemberViewControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) JRInputView *commentView;
@@ -181,12 +187,7 @@
         if (change.deletions.count>0) {
             if (self.messageList.count) {
                 NSArray<NSIndexPath *> *changes = [change deletionsInSection:0];
-                NSMutableArray *messageArray = [[NSMutableArray alloc] init];
-                for (int i=0; i<changes.count; i++) {
-                    JRMessageObject *message = [self.messageList objectAtIndex:changes[i].row];
-                    [messageArray addObject:message];
-                }
-                [self messageDeleted:messageArray];
+                [self messageDeleted:changes.count];
             } else {
                 [self messageDeletedAll];
             }
@@ -201,11 +202,11 @@
                 });
             } else {
                 [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"GROUP_NOT_EXIST", nil)];
-                [self.navigationController popViewControllerAnimated:YES];
+                [self.navigationController popToRootViewControllerAnimated:YES];
             }
         }];
     }
-    
+
     self.currentCount = 10;
     if (self.currentCount > self.messageList.count) {
         self.currentCount = self.messageList.count;
@@ -266,6 +267,8 @@
         [_tableView registerClass:[JRVCardMessageCell class] forCellReuseIdentifier:VCardCell];
         [_tableView registerClass:[JROtherFileMessageCell class] forCellReuseIdentifier:OtherFileCell];
         [_tableView registerClass:[JRGroupNotifyCell class] forCellReuseIdentifier:NotifyCell];
+        [_tableView registerClass:[JRRevokeMessageCell class] forCellReuseIdentifier:RevokeCell];
+        [_tableView registerClass:[JRExVCardMessageCell class] forCellReuseIdentifier:ExchangeCell];
         _tableView.backgroundColor = [UIColor colorWithRed:240.0f/255.0f green:240.0f/255.0f blue:240.0f/255.0f alpha:1];
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -331,59 +334,69 @@
         return [[UITableViewCell alloc] init];
     }
     JRMessageObject *message = self.messageList[index];
-    
-    JRBaseBubbleMessageCell *cell;
-    switch (message.type) {
-        case JRMessageItemTypeText: {
-            cell = [tableView dequeueReusableCellWithIdentifier:TextCell forIndexPath:indexPath];
-            [(JRTextMessageCell *)cell configWithLayout:[[JRMessageLayoutManager shareInstance].layoutDic objectForKey:message.imdnId]];
-            break;
-        }
-        case JRMessageItemTypeImage:
-        case JRMessageItemTypeVideo: {
-            cell = [tableView dequeueReusableCellWithIdentifier:ThumbImgCell forIndexPath:indexPath];
-            [(JRThumbImageMessageCell *)cell configWithLayout:[[JRMessageLayoutManager shareInstance].layoutDic objectForKey:message.transId]];
-            break;
-        }
-        case JRMessageItemTypeAudio: {
-            cell = [tableView dequeueReusableCellWithIdentifier:AudioCell forIndexPath:indexPath];
-            JRAudioLayout *layout = [[JRMessageLayoutManager shareInstance].layoutDic objectForKey:message.transId];
-            [(JRAudioMessageCell *)cell configWithLayout:layout];
-            // 如果是正在播放的音频消息，则播放动画
-            if ([[JRAudioPlayHelper shareInstance].filePath isEqualToString:[JRFileUtil getAbsolutePathWithFileRelativePath:layout.message.filePath]] && [JRAudioPlayHelper shareInstance].isPlaying) {
-                [(JRAudioMessageCell *)cell startAniamtion];
-            } else {
-                [(JRAudioMessageCell *)cell stopAniamtion];
+    if (message.state == JRMessageItemStateRevoked) {
+        JRRevokeMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:RevokeCell forIndexPath:indexPath];
+        [cell configWithLayout:[[JRMessageLayoutManager shareInstance].layoutDic objectForKey:message.imdnId]];
+        return cell;
+    } else {
+        JRBaseBubbleMessageCell *cell;
+        switch (message.type) {
+            case JRMessageItemTypeText: {
+                if (message.contentType == JRTextMessageContentTypeDefault) {
+                    cell = [tableView dequeueReusableCellWithIdentifier:TextCell forIndexPath:indexPath];
+                    [(JRTextMessageCell *)cell configWithLayout:[[JRMessageLayoutManager shareInstance].layoutDic objectForKey:message.imdnId]];
+                } else {
+                    cell = [tableView dequeueReusableCellWithIdentifier:ExchangeCell forIndexPath:indexPath];
+                    [(JRExVCardMessageCell *)cell configWithLayout:[[JRMessageLayoutManager shareInstance].layoutDic objectForKey:message.imdnId]];
+                }
+                break;
             }
-            break;
+            case JRMessageItemTypeImage:
+            case JRMessageItemTypeVideo: {
+                cell = [tableView dequeueReusableCellWithIdentifier:ThumbImgCell forIndexPath:indexPath];
+                [(JRThumbImageMessageCell *)cell configWithLayout:[[JRMessageLayoutManager shareInstance].layoutDic objectForKey:message.transId]];
+                break;
+            }
+            case JRMessageItemTypeAudio: {
+                cell = [tableView dequeueReusableCellWithIdentifier:AudioCell forIndexPath:indexPath];
+                JRAudioLayout *layout = [[JRMessageLayoutManager shareInstance].layoutDic objectForKey:message.transId];
+                [(JRAudioMessageCell *)cell configWithLayout:layout];
+                // 如果是正在播放的音频消息，则播放动画
+                if ([[JRAudioPlayHelper shareInstance].filePath isEqualToString:[JRFileUtil getAbsolutePathWithFileRelativePath:layout.message.filePath]] && [JRAudioPlayHelper shareInstance].isPlaying) {
+                    [(JRAudioMessageCell *)cell startAniamtion];
+                } else {
+                    [(JRAudioMessageCell *)cell stopAniamtion];
+                }
+                break;
+            }
+            case JRMessageItemTypeVcard: {
+                cell = [tableView dequeueReusableCellWithIdentifier:VCardCell forIndexPath:indexPath];
+                [(JRVCardMessageCell *)cell configWithLayout:[[JRMessageLayoutManager shareInstance].layoutDic objectForKey:message.transId]];
+                break;
+            }
+            case JRMessageItemTypeGeo: {
+                cell = [tableView dequeueReusableCellWithIdentifier:LocationCell forIndexPath:indexPath];
+                [(JRLocationMessageCell *)cell configWithLayout:[[JRMessageLayoutManager shareInstance].layoutDic objectForKey:message.transId]];
+                break;
+            }
+            case JRMessageItemTypeOtherFile: {
+                cell = [tableView dequeueReusableCellWithIdentifier:OtherFileCell forIndexPath:indexPath];
+                [(JROtherFileMessageCell *)cell configWithLayout:[[JRMessageLayoutManager shareInstance].layoutDic objectForKey:message.transId]];
+                break;
+            }
+            case JRMessageItemTypeNotify: {
+                JRGroupNotifyCell *notifyCell = [tableView dequeueReusableCellWithIdentifier:NotifyCell forIndexPath:indexPath];
+                [notifyCell configWithLayout:[[JRMessageLayoutManager shareInstance].layoutDic objectForKey:message.imdnId]];
+                return notifyCell;
+            }
+            case JRMessageItemTypeUnknow:
+            default:
+                cell = [[JRBaseBubbleMessageCell alloc] init];
+                break;
         }
-        case JRMessageItemTypeVcard: {
-            cell = [tableView dequeueReusableCellWithIdentifier:VCardCell forIndexPath:indexPath];
-            [(JRVCardMessageCell *)cell configWithLayout:[[JRMessageLayoutManager shareInstance].layoutDic objectForKey:message.transId]];
-            break;
-        }
-        case JRMessageItemTypeGeo: {
-            cell = [tableView dequeueReusableCellWithIdentifier:LocationCell forIndexPath:indexPath];
-            [(JRLocationMessageCell *)cell configWithLayout:[[JRMessageLayoutManager shareInstance].layoutDic objectForKey:message.transId]];
-            break;
-        }
-        case JRMessageItemTypeOtherFile: {
-            cell = [tableView dequeueReusableCellWithIdentifier:OtherFileCell forIndexPath:indexPath];
-            [(JROtherFileMessageCell *)cell configWithLayout:[[JRMessageLayoutManager shareInstance].layoutDic objectForKey:message.transId]];
-            break;
-        }
-        case JRMessageItemTypeNotify: {
-            JRGroupNotifyCell *notifyCell = [tableView dequeueReusableCellWithIdentifier:NotifyCell forIndexPath:indexPath];
-            [notifyCell configWithLayout:[[JRMessageLayoutManager shareInstance].layoutDic objectForKey:message.imdnId]];
-            return notifyCell;
-        }
-        case JRMessageItemTypeUnknow:
-        default:
-            cell = [[JRBaseBubbleMessageCell alloc] init];
-            break;
+        [cell setDelegate:self tableView:self.tableView];
+        return cell;
     }
-    [cell setDelegate:self tableView:self.tableView];
-    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -392,6 +405,9 @@
         return 0;
     }
     JRMessageObject *message = self.messageList[index];
+    if (message.state == JRMessageItemStateRevoked) {
+        return [((JRRevokeLayout *)[[JRMessageLayoutManager shareInstance].layoutDic objectForKey:message.imdnId]) calculateCellHeight];
+    }
     if (message.type == JRMessageItemTypeText) {
         return [((JRBaseBubbleLayout *)[[JRMessageLayoutManager shareInstance].layoutDic objectForKey:message.imdnId]) calculateCellHeight];
     } else if (message.type == JRMessageItemTypeNotify) {
@@ -478,10 +494,32 @@
 
 }
 
+- (void)tableView:(UITableView *)tableView revokeMessage:(JRMessageObject *)message {
+    if (([[NSDate date] timeIntervalSince1970] - [message.timestamp longLongValue]/1000) / 60 > 2) {
+        [SVProgressHUD showErrorWithStatus:@"超出两分钟无法撤回"];
+        [SVProgressHUD dismissWithDelay:1.5];
+        return;
+    }
+    [[JRMessageManager shareInstance] sendCommand:message command:JRMessageCommandTypeRevoke group:self.group];
+}
+
+- (void)tableView:(UITableView *)tableView acceptExchangeVCard:(JRMessageObject *)message {
+    NSString *content = JRCreateVCardContent(nil, [JRClient sharedInstance].currentNumber, nil, nil, [NSString stringWithFormat:@"我的号码是%@，我同意与你交换名片", [JRClient sharedInstance].currentNumber]);
+    [[JRMessageManager shareInstance] sendTextMessage:content number:self.peerNumber contentType:JRTextMessageContentTypeAgreeExchangeVCard convId:message.conversationId];
+}
+
 #pragma mark - Input View Delegate
 
 - (void)didBeginEditing {
     [self scrollToBottomWithAnimated:NO];
+}
+
+- (void)didAtMemberInGroupChat {
+    if (self.group) {
+        [JRAtMemberViewController presentWithNavigationController:^(JRAtMemberViewController *atViewController) {
+            atViewController.atDelegate = self;
+        } group:self.group presentingViewController:self];
+    }
 }
 
 - (void)sendMessage:(NSString *)message {
@@ -492,9 +530,27 @@
     }
     BOOL ret;
     if (self.group) {
-        ret = [[JRMessageManager shareInstance] sendTextMessage:message group:self.group];
+        NSError *error = NULL;
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"@(.*?) " options:NSRegularExpressionCaseInsensitive error:&error];
+        NSArray *result = [regex matchesInString:message options:NSMatchingReportProgress range:NSMakeRange(0, message.length)];
+        BOOL atAll = NO;
+        NSMutableArray<JRGroupMemberObject *> * atMembers = [[NSMutableArray alloc] init];
+        if (result.count) {
+            for (NSTextCheckingResult *match in result) {
+                NSString *displayName = [message substringWithRange:match.range];
+                displayName = [displayName substringWithRange:NSMakeRange(1, displayName.length - 2)];
+                if ([displayName isEqualToString:@"所有群成员"]) {
+                    atAll = YES;
+                    break;
+                } else {
+                    [atMembers addObject:[JRGroupDBManager getGroupMemberWithIdentity:self.group.identity displayName:displayName]];
+                }
+            }
+        }
+        
+        ret = [[JRMessageManager shareInstance] sendTextMessage:message group:self.group members:atMembers atAll:atAll];
     } else {
-        ret = [[JRMessageManager shareInstance] sendTextMessage:message number:self.peerNumber];
+        ret = [[JRMessageManager shareInstance] sendTextMessage:message number:self.peerNumber contentType:JRTextMessageContentTypeDefault convId:nil];
     }
     if (!ret) {
         [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"SEND_MESSAGE_FAILED", nil)];
@@ -632,13 +688,14 @@
     [self.tableView reloadData];
 }
 
-- (void)messageDeleted:(NSArray<JRMessageObject *> *)messages {
-    self.currentCount -= messages.count;
+- (void)messageDeleted:(NSInteger)messages {
+    self.currentCount -= messages;
     [self.tableView reloadData];
 }
 
 - (void)messageDeletedAll {
-    
+    self.currentCount = 0;
+    [self.tableView reloadData];
 }
 
 - (void)messageInserted:(NSArray<JRMessageObject *> *)messages {
@@ -779,6 +836,33 @@
                 }
             }
         }
+    }
+}
+
+#pragma mark - JRAtMemberViewControllerDelegate
+
+- (void)atAllMembers:(JRAtMemberViewController *)ViewController {
+    [self.commentView addContent:@"所有群成员 "];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+           [self.commentView beginEditing];
+    });
+}
+
+- (void)atGroupMembers:(NSArray<JRGroupMemberObject *> *)members viewController:(JRAtMemberViewController *)ViewController {
+    if (members.count > 0) {
+        NSMutableString *content = [[NSMutableString alloc] init];
+        for (int i = 0; i < members.count; i ++) {
+            if (i == 0) {
+                [content appendString:members[i].displayName];
+            } else {
+                [content appendString:[NSString stringWithFormat:@" @%@", members[i].displayName]];
+            }
+        }
+        [content appendString:@" "];
+        [self.commentView addContent:content];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.commentView beginEditing];
+        });
     }
 }
 
