@@ -31,18 +31,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     @weakify(self)
     self.groupToken = [self.group addNotificationBlock:^(BOOL deleted, NSArray<RLMPropertyChange *> * _Nullable changes, NSError * _Nullable error) {
         @strongify(self)
-        if (deleted) {
-            [self.navigationController popToRootViewControllerAnimated:YES];
-            return;
+        if (!deleted) {
+            [self.tableView reloadData];
         }
-        
-        [self.tableView reloadData];
     }];
-    
+
     self.tableView.rowHeight = 50.0f;
     self.tableView.sectionFooterHeight = 50.0f;
 }
@@ -108,9 +105,9 @@
 }
 
 - (void)footerClick {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:[self isChairman] ? @"是否解散群聊?" : @"是否退出群聊？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:[self isChairman] ? NSLocalizedString(@"DISSOLVE_GROUP_TIP", nil) : NSLocalizedString(@"LEAVE_GROUP_TIP", nil) message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        if ([self isChairman]) {
+        if (![self isChairman]) {
             [[JRGroupManager sharedInstance] leave:self.group];
         } else {
             [[JRGroupManager sharedInstance] dissolve:self.group];

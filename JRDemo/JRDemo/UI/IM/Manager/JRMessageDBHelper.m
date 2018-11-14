@@ -25,7 +25,7 @@
         for (int i=0; i<count; i++) {
             JRMessageObject *message = results[0];
             message.isRead = YES;
-            if (message.imdnType == JRMessageItemImdnTypeBoth || message.imdnType == JRMessageItemImdnTypeDisp) {
+            if (message.imdnDipOk) {
                 // 发送已读回执
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [[JRMessageManager shareInstance] sendCommand:message command:JRMessageCommandTypeRead group:nil];
@@ -182,7 +182,8 @@
         message.sessIdentity = obj.peerNumber;
     }
     message.messageChannelType = obj.channelType;
-    message.imdnType = obj.imdnType;
+    message.imdnDipOk = obj.imdnDipOk;
+    message.imdnDeli = obj.imdnDeli;
     message.conversationId = obj.conversationId;
     
     message.content = obj.content;
@@ -210,7 +211,8 @@
         message.sessIdentity = obj.peerNumber;
     }
     message.messageChannelType = obj.channelType;
-    message.imdnType = obj.imdnType;
+    message.imdnDipOk = obj.imdnDipOk;
+    message.imdnDeli = obj.imdnDeli;
     message.conversationId = obj.conversationId;
     
     message.fileName = obj.fileName;
@@ -243,7 +245,8 @@
         message.sessIdentity = obj.peerNumber;
     }
     message.messageChannelType = obj.channelType;
-    message.imdnType = obj.imdnType;
+    message.imdnDipOk = obj.imdnDipOk;
+    message.imdnDeli = obj.imdnDeli;
     message.conversationId = obj.conversationId;
     
     message.geoLatitude = [obj.geoLatitude floatValue];

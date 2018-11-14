@@ -41,18 +41,15 @@ static NSString * const GroupMemberCellId = @"GroupMemberCellId";
     [self.tableView registerNib:[UINib nibWithNibName:@"JRGroupMemberCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:GroupMemberCellId];
     self.tableView.rowHeight = 70.0f;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"friend_add"] style:UIBarButtonItemStyleDone target:self action:@selector(addMember)];
-    
+
     @weakify(self)
     self.groupToken = [self.group addNotificationBlock:^(BOOL deleted, NSArray<RLMPropertyChange *> * _Nullable changes, NSError * _Nullable error) {
         @strongify(self)
-        if (deleted) {
-            [self.navigationController popToRootViewControllerAnimated:YES];
-            return;
+        if (!deleted) {
+            [self.tableView reloadData];
         }
-        
-        [self.tableView reloadData];
     }];
-    
+
     self.membersToken = [self.members addNotificationBlock:^(RLMResults<JRGroupMemberObject *> * _Nullable results, RLMCollectionChange * _Nullable change, NSError * _Nullable error) {
         @strongify(self)
         [self.tableView reloadData];
@@ -61,6 +58,11 @@ static NSString * const GroupMemberCellId = @"GroupMemberCellId";
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)dealloc {
+    [self.groupToken invalidate];
+    [self.membersToken invalidate];
 }
 
 - (void)addMember {
@@ -72,7 +74,12 @@ static NSString * const GroupMemberCellId = @"GroupMemberCellId";
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         NSString *number = alert.textFields.firstObject.text;
         if (number.length) {
-            [[JRGroupManager sharedInstance] invite:self.group newMembers:@[[JRNumberUtil numberWithChineseCountryCode:number]]];
+            NSArray *numbers = [number componentsSeparatedByString:@","];
+            NSMutableArray *formatNumbers = [NSMutableArray arrayWithCapacity:numbers.count];
+            for (NSString *number in numbers) {
+                [formatNumbers addObject:[JRNumberUtil numberWithChineseCountryCode:number]];
+            }
+            [[JRGroupManager sharedInstance] invite:self.group newMembers:formatNumbers];
         }
     }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"CANCEL", nil) style:UIAlertActionStyleCancel handler:nil];

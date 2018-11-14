@@ -38,7 +38,8 @@
         self.isDirect = message.isDirect;
         self.isCarbonCopy = message.isCarbonCopy;
         self.isOffline = message.isOffline;
-        self.imdnType = message.imdnType;
+        self.imdnDipOk = message.imdnDipOk > 0 ? YES : NO;
+        self.imdnDeli = message.imdnDeli > 0 ? YES : NO;
         self.conversationId = message.conversationId;
     }
     return self;

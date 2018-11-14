@@ -161,9 +161,25 @@
 @property JRMessageChannelType channelType;
 
 /**
- 回执类型
+ 是否需要回已读
  */
-@property JRMessageItemImdnType imdnType;
+@property BOOL imdnDipOk;
+
+/**
+ 群消息已读号码
+ */
+@property NSString *dipOkNumbers;
+
+/**
+ 是否需要回已送达
+ */
+@property BOOL imdnDeli;
+
+/**
+ 群消息已送达号码
+ */
+@property NSString *deliNumbers;
+
 
 /**
  conversationId

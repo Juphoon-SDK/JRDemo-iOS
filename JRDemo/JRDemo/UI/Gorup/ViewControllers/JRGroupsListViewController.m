@@ -80,7 +80,7 @@ static NSString * const GroupCellId = @"GroupCellId";
         NSString *name = alert.textFields.firstObject.text;
         NSString *number = alert.textFields.lastObject.text;
         if (number.length) {
-            [[JRGroupManager sharedInstance] create:name numbers:@[number]];
+            [[JRGroupManager sharedInstance] create:name numbers:[number componentsSeparatedByString:@","]];
         }
     }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"CANCEL", nil) style:UIAlertActionStyleCancel handler:nil];

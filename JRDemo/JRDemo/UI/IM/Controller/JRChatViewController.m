@@ -187,12 +187,7 @@
         if (change.deletions.count>0) {
             if (self.messageList.count) {
                 NSArray<NSIndexPath *> *changes = [change deletionsInSection:0];
-                NSMutableArray *messageArray = [[NSMutableArray alloc] init];
-                for (int i=0; i<changes.count; i++) {
-                    JRMessageObject *message = [self.messageList objectAtIndex:changes[i].row];
-                    [messageArray addObject:message];
-                }
-                [self messageDeleted:messageArray];
+                [self messageDeleted:changes.count];
             } else {
                 [self messageDeletedAll];
             }
@@ -207,11 +202,11 @@
                 });
             } else {
                 [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"GROUP_NOT_EXIST", nil)];
-                [self.navigationController popViewControllerAnimated:YES];
+                [self.navigationController popToRootViewControllerAnimated:YES];
             }
         }];
     }
-    
+
     self.currentCount = 10;
     if (self.currentCount > self.messageList.count) {
         self.currentCount = self.messageList.count;
@@ -693,13 +688,14 @@
     [self.tableView reloadData];
 }
 
-- (void)messageDeleted:(NSArray<JRMessageObject *> *)messages {
-    self.currentCount -= messages.count;
+- (void)messageDeleted:(NSInteger)messages {
+    self.currentCount -= messages;
     [self.tableView reloadData];
 }
 
 - (void)messageDeletedAll {
-    
+    self.currentCount = 0;
+    [self.tableView reloadData];
 }
 
 - (void)messageInserted:(NSArray<JRMessageObject *> *)messages {
