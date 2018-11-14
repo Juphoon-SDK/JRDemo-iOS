@@ -661,6 +661,15 @@ static void vibrate()
         case JRCallMemberStatusPending:
             state = NSLocalizedString(@"PENDING", nil);
             break;
+        case JRCallMemberStatusInitial:
+            state = NSLocalizedString(@"CALL_INIT", nil);
+            break;
+        case JRCallMemberStatusConnecting:
+            state = NSLocalizedString(@"CALL_CONNECTING", nil);
+            break;
+        case JRCallMemberStatusRinging:
+            state = NSLocalizedString(@"RINGING", nil);
+            break;
         case JRCallMemberStatusDialingin:
             state = NSLocalizedString(@"INCOMING_CALL", nil);
             break;
@@ -676,13 +685,44 @@ static void vibrate()
         case JRCallMemberStatusOnhold:
             state = NSLocalizedString(@"HOLDING", nil);
             break;
+        case JRCallMemberStatusMuted:
+            state = NSLocalizedString(@"MUTED", nil);
+            break;
+        case JRCallMemberStatusUserNotAvailable:
+            state = NSLocalizedString(@"USER_NOT_AVAILABLE", nil);
+            break;
+        case JRCallMemberStatusNoAnswer:
+            state = NSLocalizedString(@"NO_ANSWER", nil);
+            break;
+        case JRCallMemberStatusBusy:
+            state = NSLocalizedString(@"BUSY", nil);
+            break;
+        case JRCallMemberStatusNotReachable:
+            state = NSLocalizedString(@"NOT_REACHABLE", nil);
+            break;
+        case JRCallMemberStatusRouteFailed:
+            state = NSLocalizedString(@"ROUTE_FAILED", nil);
+            break;
+        case JRCallMemberStatusUnavailable:
+            state = NSLocalizedString(@"UNAVAILABLE", nil);
+            break;
+        case JRCallMemberStatusGeneralFailure:
+        case JRCallMemberStatusUnknow:
+            state = NSLocalizedString(@"GENERAL_FAILURE", nil);
+            break;
+        case JRCallMemberStatusTimerExpired:
+            state = NSLocalizedString(@"TIMER_EXPIRED", nil);
+            break;
+        case JRCallMemberStatusDeleted:
+            state = NSLocalizedString(@"DELETED", nil);
+            break;
+        case JRCallMemberStatusForbidden:
+            state = NSLocalizedString(@"FORBIDDEN", nil);
+            break;
         case JRCallMemberStatusHangUp:
         case JRCallMemberStatusDiscing:
         case JRCallMemberStatusDisced:
             state = NSLocalizedString(@"DECLINED", nil);
-            break;
-        case JRCallMemberStatusMuted:
-            state = NSLocalizedString(@"MUTED", nil);
             break;
         default:
             state = nil;
@@ -740,6 +780,15 @@ static void vibrate()
         case JRCallMemberStatusPending:
             state = NSLocalizedString(@"PENDING", nil);
             break;
+        case JRCallMemberStatusInitial:
+            state = NSLocalizedString(@"CALL_INIT", nil);
+            break;
+        case JRCallMemberStatusConnecting:
+            state = NSLocalizedString(@"CALL_CONNECTING", nil);
+            break;
+        case JRCallMemberStatusRinging:
+            state = NSLocalizedString(@"RINGING", nil);
+            break;
         case JRCallMemberStatusDialingin:
             state = NSLocalizedString(@"INCOMING_CALL", nil);
             break;
@@ -755,13 +804,44 @@ static void vibrate()
         case JRCallMemberStatusOnhold:
             state = NSLocalizedString(@"HOLDING", nil);
             break;
+        case JRCallMemberStatusMuted:
+            state = NSLocalizedString(@"MUTED", nil);
+            break;
+        case JRCallMemberStatusUserNotAvailable:
+            state = NSLocalizedString(@"USER_NOT_AVAILABLE", nil);
+            break;
+        case JRCallMemberStatusNoAnswer:
+            state = NSLocalizedString(@"NO_ANSWER", nil);
+            break;
+        case JRCallMemberStatusBusy:
+            state = NSLocalizedString(@"BUSY", nil);
+            break;
+        case JRCallMemberStatusNotReachable:
+            state = NSLocalizedString(@"NOT_REACHABLE", nil);
+            break;
+        case JRCallMemberStatusRouteFailed:
+            state = NSLocalizedString(@"ROUTE_FAILED", nil);
+            break;
+        case JRCallMemberStatusUnavailable:
+            state = NSLocalizedString(@"UNAVAILABLE", nil);
+            break;
+        case JRCallMemberStatusGeneralFailure:
+        case JRCallMemberStatusUnknow:
+            state = NSLocalizedString(@"GENERAL_FAILURE", nil);
+            break;
+        case JRCallMemberStatusTimerExpired:
+            state = NSLocalizedString(@"TIMER_EXPIRED", nil);
+            break;
+        case JRCallMemberStatusDeleted:
+            state = NSLocalizedString(@"DELETED", nil);
+            break;
+        case JRCallMemberStatusForbidden:
+            state = NSLocalizedString(@"FORBIDDEN", nil);
+            break;
         case JRCallMemberStatusHangUp:
         case JRCallMemberStatusDiscing:
         case JRCallMemberStatusDisced:
             state = NSLocalizedString(@"DECLINED", nil);
-            break;
-        case JRCallMemberStatusMuted:
-            state = NSLocalizedString(@"MUTED", nil);
             break;
         default:
             state = nil;
